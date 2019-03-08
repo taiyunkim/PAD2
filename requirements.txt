@@ -2,10 +2,18 @@ certifi==2018.11.29
 chardet==3.0.4
 cycler==0.10.0
 decorator==4.3.2
+<<<<<<< HEAD
 Django==2.1.7
 django-crispy-forms==1.7.2
 django-json-widget==0.2.0
 django-multiupload==0.5.2
+=======
+Django==2.0.8
+django-crispy-forms==1.7.2
+django-json-widget==0.2.0
+django-multiupload==0.5.2
+django-sass-processor==0.7.2
+>>>>>>> 97ec1ef9bfea10bc96eb5f31d48228b45fbfd7b8
 idna==2.8
 ipython-genutils==0.2.0
 jsonschema==2.6.0

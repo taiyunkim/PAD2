@@ -1,4 +1,4 @@
-#!/Users/taiyunk/Desktop/workdir/developmentCodes/taiyunGitHub/PAD2/bin/python3.7
+#!/home/taiyun/PAD2/bin/python3
 """
 Given 3 files, creates a 3-way Venn diagram of intersections using the Google \
 Chart API; see :mod:`pybedtools.contrib.venn_maker` for more flexibility.

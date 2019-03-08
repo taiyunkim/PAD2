@@ -11,17 +11,18 @@
 {% endblock %}
 {% block modal_body_main %}
     <table border="0" cellspacing="5" cellpadding="5">
-        <tbody><tr>
-            <td><strong>Filter by number of peaks: </strong></td>
-            <td>&nbsp;</td>
-            <td>minimum: <input type="text" id="min" name="min" size="6"></td>
-            <td>&nbsp;</td>
-            <td>maximum: <input type="text" id="max" name="max" size="6"></td>
-        </tr>
+        <tbody>
+            <tr>
+                <td><strong>Filter by number of peaks: </strong></td>
+                <td>&nbsp;</td>
+                <td>minimum: <input type="text" id="min" name="min" size="6"></td>
+                <td>&nbsp;</td>
+                <td>maximum: <input type="text" id="max" name="max" size="6"></td>
+            </tr>
     </tbody>
     </table>
 
-    <table id="table" class="table table-hover">
+    <table id="peak-table" class="table table-hover">
         <thead>
             <tr class="active" id="table-head">
                 <th class="col-md-1 text-center">File ID</th>
@@ -75,5 +76,5 @@
 {% endblock %}
 
 {% block modal_script %}
-    <script type="text/javascript" src="{% static 'js/table.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/peakTable.js' %}"></script>
 {% endblock %}

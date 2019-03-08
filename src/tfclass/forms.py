@@ -28,7 +28,7 @@ class InputForm(forms.Form):
     """
 
     # selected peak files from datatables
-    selected_peaks = forms.CharField(widget=forms.Textarea(attrs={'readonly':'readonly','rows':6, 'cols':22, 'style':'resize:none;'}))
+    selected_field = forms.CharField(widget=forms.Textarea(attrs={'readonly':'readonly','rows':6, 'cols':22, 'style':'resize:none;'}))
 
     path = os.path.join(settings.STATIC_ROOT, 'csv', 'genenames.csv')
     with open(path, 'r') as csvfile:
@@ -42,6 +42,8 @@ class InputForm(forms.Form):
     # user input peak file
     peak_File = MultiFileField(min_num=0, required=False, label='Upload custom peak file', help_text='File must be in the form of <br /> chrNum\tstart\tend')
 
+
+
     # cutoff field
     path = os.path.join(settings.STATIC_ROOT, 'csv', 'cutoffs.csv')
     with open(path, 'r') as csvfile:
@@ -50,6 +52,7 @@ class InputForm(forms.Form):
     cutoff_tuple = tuple(cutoff_list)
     CUTOFF_CHOICES = cutoff_tuple
     cut_off = forms.ChoiceField(choices=CUTOFF_CHOICES, required=True, help_text='Threshold to separate proximal and distal elements')
+
 
     # plot choices
     PLOT_CHOICES = (
@@ -61,11 +64,13 @@ class InputForm(forms.Form):
 
     pvalue = forms.FloatField(label="P-Value cut off", max_value=1, min_value=0)
 
+
     #validating input
     def clean(self):
         cleaned_data = super(InputForm, self).clean()
         peak_File = cleaned_data.get('peak_File')
-        if (peak_File is not None) and (not checkPeakFile(peak_File)):
+        if ( (not checkPeakFile(peak_File)) and (peak_File is not None) ):
+        # if (not checkPeakFile(peak_File)):
             raise forms.ValidationError({'peak_File': ["Invalid file format.",]})
 
 
@@ -84,13 +89,14 @@ class VariableInputForm(forms.Form):
                 Follow distal: proximal will not cluster and proximal heatmap axis ordering will follow distal heatmap axis ordering.
             )
     """
-    selected_peaks = forms.CharField(widget=forms.Textarea(attrs={'readonly':'readonly','rows':6, 'cols':22, 'style':'resize:none;'}))
+    selected_field = forms.CharField(widget=forms.Textarea(attrs={'readonly':'readonly','rows':6, 'cols':22, 'style':'resize:none;'}))
 
     # uploaded peak files from user
     USERPEAK_CHOICES = ()
     uploaded_peak_File = forms.MultipleChoiceField(choices=USERPEAK_CHOICES, required=False)
     new_peak_File = MultiFileField(min_num=0, required=False, label='Upload custom peak file', help_text='File must be in the form of <br /> chrNum\tstart\tend')
 
+    # cutoff field
     path = os.path.join(settings.STATIC_ROOT, 'csv', 'cutoffs.csv')
     with open(path, 'r') as csvfile:
         reader = csv.reader(csvfile)

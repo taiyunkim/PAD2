@@ -25,7 +25,7 @@ SECRET_KEY = 'h_i-2u#oa(_y$%5d0v)3o6u@s(q$%fup$d+v3$y8#4-&p03cn-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['10.65.125.239', 'localhost']
 
 
 # Application definition
@@ -40,8 +40,13 @@ INSTALLED_APPS = [
 
     # my apps
     'tfclass',
+    'rgclass',
     # third party apps
-    'crispy_forms'
+    'crispy_forms',
+    # SASS
+    # 'sass_processor',
+    # SCSS
+    # 'django_scss'
 ]
 
 MIDDLEWARE = [
@@ -139,6 +144,13 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_env', 'static_root
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static_proj', 'our_static')
 ]
+
+# STATICFILES_FINDERS = (
+#     'django.contrib.staticfiles.finders.FileSystemFinder',
+#     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#     # other finders..
+#     'django_scss.finders.SCSSFinder',
+# )
 
 MEDIA_URL = '/media/'
 

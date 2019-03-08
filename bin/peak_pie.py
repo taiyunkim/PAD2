@@ -1,4 +1,4 @@
-#!/Users/taiyunk/Desktop/workdir/developmentCodes/taiyunGitHub/PAD2/bin/python3.7
+#!/home/taiyun/PAD2/bin/python3
 """
 Make a pie chart where peaks fall in annotations; see \
 :mod:`pybedtools.contrib.Classifier` for more flexibility.

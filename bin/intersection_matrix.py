@@ -1,4 +1,4 @@
-#!/Users/taiyunk/Desktop/workdir/developmentCodes/taiyunGitHub/PAD2/bin/python3.7
+#!/home/taiyun/PAD2/bin/python3
 """
 Create a matrix of many pairwise intersections; see \
 :mod:`pybedtools.contrib.IntersectionMatrix` for more flexibility

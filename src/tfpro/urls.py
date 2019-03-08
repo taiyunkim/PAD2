@@ -23,15 +23,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 # import tfclass.views
-from tfclass import views
+from tfclass import views as tfv
+from rgclass import views as rgv
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.tfClassifyForm),
-    # path('/', tfclass.views.tfClassifyForm),
-    path('instruction/', views.tfClassifyGuide),
-    path('result/', views.tfClassifyResult),
-    path('admin/', admin.site.urls),
+    path('', rgv.rgClassifyForm),
+    path('result/', rgv.rgClassifyResult),
+    path('PADv1/', tfv.tfClassifyForm),
+    path('PADv1/instruction/', tfv.tfClassifyGuide),
+    path('PADv1/result/', tfv.tfClassifyResult),
 ]
 
 
