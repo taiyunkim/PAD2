@@ -26,17 +26,20 @@
         <thead>
             <tr class="active" id="table-head">
                 <th class="col-md-1 text-center">File ID</th>
+                <th class="col-md-1 text-center">Filename</th>
             </tr>
         </thead>
         <tfoot>
             <tr class="active" id="table-foot">
                 <th class="col-md-1 text-center">File ID</th>
+                <th class="col-md-1 text-center">Filename</th>
             </tr>
         </tfoot>
         <tbody id=table-body>
             {% for row in table %}
             <tr class="rows" id={{row.fileID}}>
                 <td class="col-md-1 text-center" value={{row.fileID}}>{{row.fileID}}</td>
+                <td class="col-md-1 text-center" value={{row.filename}}>{{row.filename}}</td>
             </tr>
             {% endfor %}
         </tbody>

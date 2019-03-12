@@ -44,21 +44,21 @@ class InputForm(forms.Form):
 
     # region field
     REGION_CHOICES = (
-        ('E1', "E1"),
-        ('E2', "E2"),
-        ('E3', "E3"),
-        ('E4', "E4"),
-        ('E5', "E5"),
-        ('E6', "E6"),
-        ('E7', "E7"),
-        ('E8', "E8"),
-        ('E9', "E9"),
-        ('E10', "E10"),
-        ('E11', "E11"),
-        ('E12', "E12"),
-        ('E13', "E13"),
-        ('E14', "E14"),
-        ('E15', "E15"),
+        ('E1', "Transcription Elongation"),
+        ('E2', "Enhacer (poised)"),
+        ('E3', "Enhancer (active)"),
+        ('E4', "Enhancer (weak)"),
+        ('E5', "Promoter (active)"),
+        ('E6', "Promoter (transition)"),
+        ('E7', "Promoter (inactive)"),
+        ('E8', "Promoter (active OSN)"),
+        ('E9', "Enhancer (active OSN)"),
+        ('E10', "Enhancer (poised OSN)"),
+        ('E11', "CTCF (Insulater)"),
+        ('E12', "Bivalent Promoter"),
+        ('E13', "Repressed chromatin"),
+        ('E14', "Low signal/Repetitive elements"),
+        ('E15', "Heterochromatin"),
 
     )
     region = forms.ChoiceField(choices=REGION_CHOICES, required=True, help_text="Help Text here")
@@ -100,21 +100,21 @@ class VariableInputForm(forms.Form):
 
     # region field
     REGION_CHOICES = (
-        ('E1', "E1"),
-        ('E2', "E2"),
-        ('E3', "E3"),
-        ('E4', "E4"),
-        ('E5', "E5"),
-        ('E6', "E6"),
-        ('E7', "E7"),
-        ('E8', "E8"),
-        ('E9', "E9"),
-        ('E10', "E10"),
-        ('E11', "E11"),
-        ('E12', "E12"),
-        ('E13', "E13"),
-        ('E14', "E14"),
-        ('E15', "E15"),
+        ('E1', "Transcription Elongation"),
+        ('E2', "Enhancer (poised)"),
+        ('E3', "Enhancer (active)"),
+        ('E4', "Enhancer (weak)"),
+        ('E5', "Promoter (active)"),
+        ('E6', "Promoter (transition)"),
+        ('E7', "Promoter (inactive)"),
+        ('E8', "Promoter (active OSN)"),
+        ('E9', "Enhancer (active OSN)"),
+        ('E10', "Enhancer (poised OSN)"),
+        ('E11', "CTCF (Insulator)"),
+        ('E12', "Bivalent Promoter"),
+        ('E13', "Repressed chromatin"),
+        ('E14', "Low signal/Repetitive elements"),
+        ('E15', "Heterochromatin"),
 
     )
     region = forms.ChoiceField(choices=REGION_CHOICES, required=True, help_text="Help Text here")

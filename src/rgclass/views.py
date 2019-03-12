@@ -51,7 +51,7 @@ def rgClassifyForm(request):
         }
     )
     # table = Signal_db.objects.all().values('fileID', 'filename')
-    table = Signal_db.objects.all().values('fileID')
+    table = Signal_db.objects.all().values('fileID', 'filename')
     context = {
         'form': form,
         'table': table,
@@ -220,7 +220,7 @@ def rgClassifyResult(request):
             # 'proc_time': proc_time
         }
     )
-    table = Signal_db.objects.all().values('fileID')
+    table = Signal_db.objects.all().values('fileID', 'filename')
 
     context = {
         'form': form,
@@ -230,6 +230,7 @@ def rgClassifyResult(request):
         # 'proximal_dendrogram': proximal_dendrogram,
         # 'distal_dendrogram': distal_dendrogram,
         'app': "reg",
+        'region': region,
         'matrix': True,
         'page': "PADv2"
     }

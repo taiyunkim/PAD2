@@ -28,7 +28,7 @@
             <script type="text/javascript" src="{% static 'js/distal.js' %}"></script>
             <p>White tile indicates non-significant value.</p>
         {% elif matrix and app == 'reg' %}
-            <h2 class="page-header heatmap-title">Correlation of Chip-seq by regions</h2>
+            <h2 class="page-header heatmap-title">Correlation of Chip-seq by regions ({{region}}) </h2>
             <a id=regionalSvg href="" download="region.svg">Download this plot as SVG</a>
             <div id="region" class="plotly-container"></div>
             <script type="text/javascript">var json_data = {{json_data|safe}};</script>
