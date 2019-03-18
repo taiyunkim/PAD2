@@ -19,3 +19,21 @@ class Signal_db(models.Model):
 
     def __str__(self):
         return '%s %s' % (self.fileID, self.filename)
+
+
+class Signal_db_info(models.Model):
+    """
+    The Signal_db_info class defines the normalised coverage of the signalfiles for each regions
+    **Region** - Genomic regions
+    **FileID** - ID of a file.
+    **Value** - normalised coverage
+    """
+    region = models.CharField(db_index = True, max_length=5)
+    value = models.FloatField()
+    fileID = models.CharField(db_index=True, max_length=50)
+
+    def __unicode__(self):
+        return u'%s %s %f' % (self.region, self.fileID, self.value)
+
+    def __str__(self):
+        return '%s %s %f' % (self.region, self.fileID, self.value)

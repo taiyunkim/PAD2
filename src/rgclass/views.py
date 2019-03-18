@@ -23,7 +23,7 @@ from django.forms import widgets
 
 from .forms import InputForm, VariableInputForm
 # from .function import
-from .models import Signal_db
+from .models import Signal_db, Signal_db_info
 
 from .reg import reg_mats
 
@@ -36,6 +36,7 @@ import scipy.spatial.distance as ssd
 import re
 import os
 import math
+import copy
 
 import json
 import numpy as np
@@ -186,10 +187,12 @@ def rgClassifyResult(request):
     regional_dendrogram = dendrogram(regional_linkage_matrix, labels=signal_database_id)
 
     f_order = regional_dendrogram['ivl']
+    f_order_new = copy.deepcopy(regional_dendrogram['ivl'])
     ordered_reg_matrix = [[0 for x in range(matrix_size)] for x in range(matrix_size)]
-
     # find the index of ordered item in the original matrix
     # use the index found and get the value from the original matrix and get the value and insert to new matrix
+    signal_coverage_value = Signal_db_info.objects.filter(fileID__in = f_order, region = region).values_list('fileID', 'value')
+
     for i, f_name1 in enumerate(f_order):
         # index1 = fname.index(f_name1)
         index1 = signal_database_id.index(f_name1)
@@ -198,16 +201,17 @@ def rgClassifyResult(request):
             index2 = signal_database_id.index(f_name2)
 
             ordered_reg_matrix[i][j] = 1-reg_matrix.values[index1][index2]
-
-
-
+        f_order_new[i] = f_order_new[i] + ' (' + str(list(signal_coverage_value.filter(fileID = f_order_new[i]).values_list('value', flat = True))[0]) + ')'
+        # f_order_new[i] = f_order_new[i] + "_a"
+        # print(f_order[i])
+        # print(f_order_new[i])
     proc_time = time.time()-start_time
     json_data = json.dumps(
         {
             # 'reg_matrix': reg_matrix.values.tolist(),
             'reg_matrix': ordered_reg_matrix,
             # 'app': "reg",
-            'r_filename': f_order,
+            'r_filename': f_order_new,
             # 'd_filename': fna,
             'matrix_size': matrix_size,
             # 'proximal_matrix': ordered_proximal_matrix,
