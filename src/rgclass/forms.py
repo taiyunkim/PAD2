@@ -44,21 +44,21 @@ class InputForm(forms.Form):
 
     # region field
     REGION_CHOICES = (
-        ('E1', "Transcription Elongation"),
-        ('E2', "Enhacer (poised)"),
-        ('E3', "Enhancer (active)"),
-        ('E4', "Enhancer (weak)"),
-        ('E5', "Promoter (active)"),
-        ('E6', "Promoter (transition)"),
-        ('E7', "Promoter (inactive)"),
-        ('E8', "Promoter (active OSN)"),
-        ('E9', "Enhancer (active OSN)"),
-        ('E10', "Enhancer (poised OSN)"),
-        ('E11', "CTCF (Insulater)"),
-        ('E12', "Bivalent Promoter"),
-        ('E13', "Repressed chromatin"),
-        ('E14', "Low signal/Repetitive elements"),
-        ('E15', "Heterochromatin"),
+        ('E1', "Transcription Elongation [3.23%]"),
+        ('E2', "Enhacer (poised) [1.48%]"),
+        ('E3', "Enhancer (active) [0.73%]"),
+        ('E4', "Enhancer (weak) [0.69%]"),
+        ('E5', "Promoter (active) [0.39%]"),
+        ('E6', "Promoter (transition) [0.44%]"),
+        ('E7', "Promoter (inactive) [0.57%]"),
+        ('E8', "Promoter (active OSN) [0.6%]"),
+        ('E9', "Enhancer (active OSN) [0.34%]"),
+        ('E10', "Enhancer (poised OSN) [0.69%]"),
+        ('E11', "CTCF (Insulater) [0.65%]"),
+        ('E12', "Bivalent Promoter [5.21%]"),
+        ('E13', "Repressed chromatin [24.8%]"),
+        ('E14', "Low signal/Repetitive elements [2.81%]"),
+        ('E15', "Heterochromatin [54.77%]"),
 
     )
     region = forms.ChoiceField(choices=REGION_CHOICES, required=True, help_text="Help Text here")
@@ -100,21 +100,21 @@ class VariableInputForm(forms.Form):
 
     # region field
     REGION_CHOICES = (
-        ('E1', "Transcription Elongation"),
-        ('E2', "Enhancer (poised)"),
-        ('E3', "Enhancer (active)"),
-        ('E4', "Enhancer (weak)"),
-        ('E5', "Promoter (active)"),
-        ('E6', "Promoter (transition)"),
-        ('E7', "Promoter (inactive)"),
-        ('E8', "Promoter (active OSN)"),
-        ('E9', "Enhancer (active OSN)"),
-        ('E10', "Enhancer (poised OSN)"),
-        ('E11', "CTCF (Insulator)"),
-        ('E12', "Bivalent Promoter"),
-        ('E13', "Repressed chromatin"),
-        ('E14', "Low signal/Repetitive elements"),
-        ('E15', "Heterochromatin"),
+        ('E1', "Transcription Elongation [3.23%]"),
+        ('E2', "Enhacer (poised) [1.48%]"),
+        ('E3', "Enhancer (active) [0.73%]"),
+        ('E4', "Enhancer (weak) [0.69%]"),
+        ('E5', "Promoter (active) [0.39%]"),
+        ('E6', "Promoter (transition) [0.44%]"),
+        ('E7', "Promoter (inactive) [0.57%]"),
+        ('E8', "Promoter (active OSN) [0.6%]"),
+        ('E9', "Enhancer (active OSN) [0.34%]"),
+        ('E10', "Enhancer (poised OSN) [0.69%]"),
+        ('E11', "CTCF (Insulater) [0.65%]"),
+        ('E12', "Bivalent Promoter [5.21%]"),
+        ('E13', "Repressed chromatin [24.8%]"),
+        ('E14', "Low signal/Repetitive elements [2.81%]"),
+        ('E15', "Heterochromatin [54.77%]"),
 
     )
     region = forms.ChoiceField(choices=REGION_CHOICES, required=True, help_text="Help Text here")
