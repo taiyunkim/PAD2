@@ -32,19 +32,21 @@ def checkPeakFile(peakfile_list):
     for peakfile in peakfile_list:
         peak_dict = {}
         for line in peakfile:
-            if re.search('chr[\dA-Z]+', line):
-                chromosome = re.search('^chr[\dA-Z]+', line)
+            if re.search('chr[\dA-Z]+', line.decode('utf-8')):
+                chromosome = re.search('^chr[\dA-Z]+', line.decode('utf-8'))
                 # positions of both start and end of peaks
-                pos = re.search('\s+\d+\s+\d+\s*', line)
+                pos = re.search('\s+\d+\s+\d+\s*.*', line.decode('utf-8'))
                 # split the start and end into separate variables
                 if not chromosome or not pos:
                     # Invalid file format!
                     return False
-                start = re.search('^\s\d+\s', pos.group())
-                end = re.search('\s\d+\s$', pos.group())
+                start = re.search('(^\s\d+)(\s\d+)(\s.*)$', pos.group()).group(1)
+                end = re.search('(^\s\d+)(\s\d+)(\s.*)$', pos.group()).group(2)
                 # remove any whitespaces
-                start = re.sub('\s*', '', start.group(0))
-                end = re.sub('\s*', '', end.group(0))
+
+
+                start = re.sub('\s*', '', start)
+                end = re.sub('\s*', '', end)
                 midpoint = int((int(start) + int(end))/2)
                 if chromosome.group(0) not in peak_dict.keys():
                     peak_dict[chromosome.group(0)] = []
@@ -54,7 +56,6 @@ def checkPeakFile(peakfile_list):
             return False
     return True
 
-
 # convert a peakfile to a BED file suitable for uses for analysis
 # Jacard has specific template for BED file and this function generate this
 # Jacard also need chromosome to be sorted
@@ -63,15 +64,15 @@ def createPeakToBedFile(peakfile_list, session_id, db_name):
         filename = peakfile.name
         peak_dict = {}
         for line in peakfile:
-            if re.search('chr[\dA-Z]+', line):
-                chromosome = re.search('^chr[\dA-Z]+', line)
+            if re.search('chr[\dA-Z]+', line.decode('utf-8')):
+                chromosome = re.search('^chr[\dA-Z]+', line.decode('utf-8'))
                 # positions of both start and end of peaks
-                pos = re.search('\s+\d+\s+\d+\s*', line)
+                pos = re.search('\s+\d+\s+\d+\s*', line.decode('utf-8'))
                 # split the start and end into separate variables
                 if not chromosome or not pos:
                     return False
                 start = re.search('^\s\d+\s', pos.group())
-                end = re.search('\s\d+\s$', pos.group())
+                end = re.search('\s\d+\s*$', pos.group())
                 # remove any whitespaces
                 start = re.sub('\s*', '', start.group(0))
                 end = re.sub('\s*', '', end.group(0))

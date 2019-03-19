@@ -56,6 +56,19 @@ $(document).ready(function() {
 } );
 
 // when save button is clicked, display the files selected in forms.
+// saveRows = function(){
+//     var rowArray = $('.selected');
+//     // alert(rowArray[0].id)
+//     var filename = '';
+//     for (var i = 0; i < rowArray.length; i++) {
+//         rowArray[i];
+//         filename = filename.concat(rowArray[i].cells[1].innerText);
+//         filename = filename.concat('\n');
+//     }
+//     $('#id_selected_field').text(filename);
+//
+// };
+
 saveRows = function(){
     var rowArray = $('.selected');
     // alert(rowArray[0].id)
@@ -64,6 +77,6 @@ saveRows = function(){
         filename = filename.concat(rowArray[i].id);
         filename = filename.concat('\n');
     }
-    $('#id_selected_peaks').text(filename);
+    $('#id_selected_field').text(filename);
 
 };

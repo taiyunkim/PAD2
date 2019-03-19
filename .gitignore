@@ -5,7 +5,7 @@ lib
 *.egg-info
 *.pot
 *.py[co]
-__pycache__
+*__pycache__*
 MANIFEST
 dist/
 docs/_build/
@@ -81,3 +81,9 @@ target/
 
 # DB
 tf_pad_db_dump.sql
+
+# tmp files
+tmp/*
+
+static_env/media_root/signal_file_db/*
+static_env/media_root/users_peak_files/*

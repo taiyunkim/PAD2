@@ -4,9 +4,15 @@
 {% block form_content %}
     <h3 class="page-header sidebar-form-name">Submission Form</h3>
     <div class="form-group">
-        <button id="modalButton" type="button" class="btn btn-default btn-block btn-sm" data-toggle="modal" data-target="#peak_db_select">
+        {% if page == 'PADv2' %}
+            <button id="modalButton" type="button" class="btn btn-default btn-block btn-sm" data-toggle="modal" data-target="#signal_db_select">
+            Select signals from database
+            </button>
+        {% elif page == 'PADv1' %}
+            <button id="modalButton" type="button" class="btn btn-default btn-block btn-sm" data-toggle="modal" data-target="#peak_db_select">
             Select peaks from database
-        </button>
+            </button>
+        {% endif%}
     </div>
     {{ form | crispy }}
     <input id="submit-user-input" class='btn btn-primary btn-block' type="submit" value="Submit" />

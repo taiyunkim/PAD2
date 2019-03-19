@@ -28,7 +28,7 @@ class InputForm(forms.Form):
     """
 
     # selected peak files from datatables
-    selected_peaks = forms.CharField(widget=forms.Textarea(attrs={'readonly':'readonly','rows':6, 'cols':22, 'style':'resize:none;'}))
+    selected_field = forms.CharField(widget=forms.Textarea(attrs={'readonly':'readonly','rows':6, 'cols':22, 'style':'resize:none;'}))
 
     path = os.path.join(settings.STATIC_ROOT, 'csv', 'genenames.csv')
     with open(path, 'r') as csvfile:
@@ -42,23 +42,6 @@ class InputForm(forms.Form):
     # user input peak file
     peak_File = MultiFileField(min_num=0, required=False, label='Upload custom peak file', help_text='File must be in the form of <br /> chrNum\tstart\tend')
 
-    # Separation options
-    pad, states = 'PAD', 'States'
-    COMPARISON_CHOICES = (
-        (pad, "Proximal and Distal"),
-        (states, "States")
-        # ('PAD', 'Proximal and Distal')
-    )
-    comparison = forms.ChoiceField(
-        choices=COMPARISON_CHOICES,
-        required=True,
-        label='What would you like to compare?',
-        help_text='help text here',
-        widget = forms.Select(attrs = {
-            'onChange': "fillOptions();",
-            'onStart': "fillOptions();"
-        })
-    )
 
 
     # cutoff field
@@ -68,49 +51,8 @@ class InputForm(forms.Form):
         cutoff_list = list(map(tuple, reader))
     cutoff_tuple = tuple(cutoff_list)
     CUTOFF_CHOICES = cutoff_tuple
-    cut_off = forms.ChoiceField(choices=CUTOFF_CHOICES, required=False, help_text='Threshold to separate proximal and distal elements')
+    cut_off = forms.ChoiceField(choices=CUTOFF_CHOICES, required=True, help_text='Threshold to separate proximal and distal elements')
 
-    # separation field
-    SEPARATION_CHOICES = (
-        ('E1', "E1"),
-        ('E2', "E2"),
-        ('E3', "E3"),
-        ('E4', "E4")
-    )
-    separation_1 = forms.ChoiceField(choices=SEPARATION_CHOICES, required=False, help_text="Help Text here")
-    separation_2 = forms.ChoiceField(choices=SEPARATION_CHOICES, required=False, help_text="Help Text here")
-
-
-
-    # def __init__(self, data=None, *args, **kwargs):
-    #     super(InputForm, self).__init__(data, *args, **kwargs)
-    #     if data and data.get('comparison', None) == self.pad:
-    #         self.fields['cut_off'].required = True
-    #     elif data and data.get('comparison', None) == self.states:
-    #         self.fields['separation_1'].required = True
-    #         self.fields['separation_2'].required = True
-
-    # def __init__(self, *args, **kwargs):
-    #     comparison_field = self.comparison
-    #     if comparison_field == "PAD":
-    #         del self.separation_1
-    #         del self.separation_2
-    #     elif comparison_field == "States":
-    #         del self.cut_off
-    #                 # do something here to hide or remove field
-    #     super(InputForm, self).__init__(*args, **kwargs)
-
-    # def __init__(self, *args, **kwargs):
-    #     super(InputForm, self).__init__(*args, **kwargs)
-    #     # this_comparison = self.instance.comparison
-    #     this_comparison = self.fields['comparison']
-    #     print(this_comparison._get_choices)
-    #
-    #     if this_comparison == "PAD":
-    #         del self.fields['separation_1']
-    #         del self.fields['separation_2']
-    #     elif this_comparison == "States":
-    #         del self.fields['cut_off']
 
     # plot choices
     PLOT_CHOICES = (
@@ -127,7 +69,8 @@ class InputForm(forms.Form):
     def clean(self):
         cleaned_data = super(InputForm, self).clean()
         peak_File = cleaned_data.get('peak_File')
-        if (peak_File is not None) and (not checkPeakFile(peak_File)):
+        if ( (not checkPeakFile(peak_File)) and (peak_File is not None) ):
+        # if (not checkPeakFile(peak_File)):
             raise forms.ValidationError({'peak_File': ["Invalid file format.",]})
 
 
@@ -146,31 +89,12 @@ class VariableInputForm(forms.Form):
                 Follow distal: proximal will not cluster and proximal heatmap axis ordering will follow distal heatmap axis ordering.
             )
     """
-    selected_peaks = forms.CharField(widget=forms.Textarea(attrs={'readonly':'readonly','rows':6, 'cols':22, 'style':'resize:none;'}))
+    selected_field = forms.CharField(widget=forms.Textarea(attrs={'readonly':'readonly','rows':6, 'cols':22, 'style':'resize:none;'}))
 
     # uploaded peak files from user
     USERPEAK_CHOICES = ()
     uploaded_peak_File = forms.MultipleChoiceField(choices=USERPEAK_CHOICES, required=False)
     new_peak_File = MultiFileField(min_num=0, required=False, label='Upload custom peak file', help_text='File must be in the form of <br /> chrNum\tstart\tend')
-
-
-    pad, states = 'PAD', 'States'
-    COMPARISON_CHOICES = (
-        (pad, "Proximal and Distal"),
-        (states, "States")
-        # ('PAD', 'Proximal and Distal')
-    )
-    comparison = forms.ChoiceField(
-        choices=COMPARISON_CHOICES,
-        required=True,
-        label='What would you like to compare?',
-        help_text='help text here',
-        widget = forms.Select(attrs = {
-            'onChange': "fillOptions();",
-            'onStart': "fillOptions();"
-        })
-    )
-
 
     # cutoff field
     path = os.path.join(settings.STATIC_ROOT, 'csv', 'cutoffs.csv')
@@ -179,18 +103,7 @@ class VariableInputForm(forms.Form):
         cutoff_list = list(map(tuple, reader))
     cutoff_tuple = tuple(cutoff_list)
     CUTOFF_CHOICES = cutoff_tuple
-    cut_off = forms.ChoiceField(choices=CUTOFF_CHOICES, required=False, help_text='Threshold to separate proximal and distal elements')
-
-    # separation field
-    SEPARATION_CHOICES = (
-        ('E1', "E1"),
-        ('E2', "E2"),
-        ('E3', "E3"),
-        ('E4', "E4")
-    )
-    separation_1 = forms.ChoiceField(choices=SEPARATION_CHOICES, required=False, help_text="Help Text here")
-    separation_2 = forms.ChoiceField(choices=SEPARATION_CHOICES, required=False, help_text="Help Text here")
-
+    cut_off = forms.ChoiceField(choices=CUTOFF_CHOICES, required=True, help_text='Threshold to separate proximal and distal elements')
 
     PLOT_CHOICES = (
         ('Independent', 'Independent'),

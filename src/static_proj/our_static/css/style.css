@@ -1,8 +1,21 @@
-/* make sidebar nav vertical */ 
+/*
+  dark blue   : #0B3C5D
+  sky blue    : #328CC1
+  gold leaf   : #D9B310
+  ivory black : #1D2731
+*/
+
+
+
+
+
+/* make sidebar nav vertical */
 @media (min-width: 768px) {
-  .sidebar-nav .navbar .navbar-collapse {
+  /* .sidebar-nav .navbar .navbar-collapse { */
+  .sidebar-nav {
     padding: 0;
     max-height: none;
+    color: white;
   }
   .sidebar-nav .navbar ul {
     float: none;
@@ -14,7 +27,8 @@
     float: none;
     display: block;
   }
-  .sidebar-nav .navbar li a {
+  /* .sidebar-nav .navbar li a { */
+  .sidebar-nav li a {
     padding-top: 12px;
     padding-bottom: 12px;
   }
