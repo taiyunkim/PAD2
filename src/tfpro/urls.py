@@ -25,6 +25,7 @@ from django.conf.urls.static import static
 # import tfclass.views
 from tfclass import views as tfv
 from rgclass import views as rgv
+from rgclassMMTen import views as rgmtv
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,6 +34,9 @@ urlpatterns = [
     path('PADv1/', tfv.tfClassifyForm),
     path('PADv1/instruction/', tfv.tfClassifyGuide),
     path('PADv1/result/', tfv.tfClassifyResult),
+    path('PADmm10/', rgmtv.rgClassifyForm),
+    path('PADmm10/result/', rgmtv.rgClassifyResult),
+
 ]
 
 

@@ -1,5 +1,5 @@
 <div class="jumbotron">
-    <h1>Welcome to PAD {% if page == 'PADv2' %}v2:</h1> <br /> <h2>Clustering of chromatin regions </h2> {% else %}: </h1><br> <h2> Clustering of Proximal And Distal regions from TSS. </h2>{% endif %}
+    <h1>Welcome to PAD {% if page == 'PADv2' %}v2:</h1> <br /> <h2>Clustering of chromatin regions </h2> {% elif page == 'PADvMMTen' %}(ver. mm10):</h1> <br /> <h2>Clustering of chromatin regions </h2> {% else %}: </h1><br> <h2> Clustering of Proximal And Distal regions from TSS. </h2>{% endif %}
     <p><h4>Quick start guide:</h4></p>
     <p>
         1. Select the peaks from the database by clicking the green button.
@@ -11,6 +11,8 @@
         {% if page == 'PADv1' %}
         4. Select the 'cut-off' value which will be the threshold to separate 'proximal' and 'distal'.
         {% elif page == 'PADv2' %}
+        4. Select the 'region' which you wish to compare.
+        {% elif page == 'PADvMMTen' %}
         4. Select the 'region' which you wish to compare.
         {% endif %}
         <br>
