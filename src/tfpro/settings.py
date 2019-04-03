@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'tfclass',
     'rgclass',
     'rgclassMMTen',
+    'stclass',
     # third party apps
     'crispy_forms',
     # SASS

@@ -26,14 +26,21 @@ from django.conf.urls.static import static
 from tfclass import views as tfv
 from rgclass import views as rgv
 from rgclassMMTen import views as rgmtv
+from stclass import views as stv
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('newStates/', stv.rgClassifyForm),
+    path('newStates/result/', stv.rgClassifyResult),
+
     path('', rgv.rgClassifyForm),
     path('result/', rgv.rgClassifyResult),
+
     path('PADv1/', tfv.tfClassifyForm),
     path('PADv1/instruction/', tfv.tfClassifyGuide),
     path('PADv1/result/', tfv.tfClassifyResult),
+
     path('PADmm10/', rgmtv.rgClassifyForm),
     path('PADmm10/result/', rgmtv.rgClassifyResult),
 
