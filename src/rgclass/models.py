@@ -10,8 +10,8 @@ class Signal_db(models.Model):
     **Filename** - Name of the (original) file.
     """
     # fileID = models.IntegerField(db_index=True) # A unique identifier of the file
-    fileID = models.CharField(max_length=50)
-    filename = models.CharField(db_index=True, max_length=25) # actual original file name
+    fileID = models.CharField(max_length=100)
+    filename = models.CharField(db_index=True, max_length=100) # actual original file name
     # proteinName = models.CharField(max_length=) # protein names
 
     def __unicode__(self):
