@@ -54,10 +54,10 @@ class InputForm(forms.Form):
             ('E7', "Promoter (Active) [0.99%]"),
             ('E8', "Promoter (Poised) [0.46%]"),
             ('E9', "Transcription Elongation [3.22%]"),
+            ('E11', "Repressed Chromatin [6.37%]"),
         )),
         ("Control", (
             ('E10', "Low Signal/Repetitive Elements [40.03%]"),
-            ('E11', "Repressed Chromatin [6.37%]"),
             ('E12', "Heterochromatin [40.58%]"),
         )),
         ("Additional", (
@@ -116,11 +116,10 @@ class VariableInputForm(forms.Form):
             ('E7', "Promoter (Active) [0.99%]"),
             ('E8', "Promoter (Poised) [0.46%]"),
             ('E9', "Transcription Elongation [3.22%]"),
-
+            ('E11', "Repressed Chromatin [6.37%]"),
         )),
         ("Control", (
             ('E10', "Low Signal/Repetitive Elements [40.03%]"),
-            ('E11', "Repressed Chromatin [6.37%]"),
             ('E12', "Heterochromatin [40.58%]"),
         )),
         ("Additional", (
