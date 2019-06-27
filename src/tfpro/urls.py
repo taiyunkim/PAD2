@@ -31,18 +31,20 @@ from stclass import views as stv
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('newStates/', stv.rgClassifyForm),
-    path('newStates/result/', stv.rgClassifyResult),
+    path('', stv.rgClassifyForm),
+    path('result/', stv.rgClassifyResult),
 
-    path('', rgv.rgClassifyForm),
-    path('result/', rgv.rgClassifyResult),
+# version that inlcude OSN
+#   path('', rgv.rgClassifyForm),
+#   path('result/', rgv.rgClassifyResult),
 
     path('PADv1/', tfv.tfClassifyForm),
     path('PADv1/instruction/', tfv.tfClassifyGuide),
     path('PADv1/result/', tfv.tfClassifyResult),
 
-    path('PADmm10/', rgmtv.rgClassifyForm),
-    path('PADmm10/result/', rgmtv.rgClassifyResult),
+# version that use mm10 Emission regions reported by other people
+#    path('PADmm10/', rgmtv.rgClassifyForm),
+#    path('PADmm10/result/', rgmtv.rgClassifyResult),
 
 ]
 

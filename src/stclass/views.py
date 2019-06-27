@@ -87,7 +87,7 @@ def rgClassifyForm(request):
         request.session['signal_database_id'] = signal_database_id
         # request.session['heatmap'] = cleaned_data.get('heatmap')
 
-        return redirect('/newStates/result')
+        return redirect('/result')
     return render(request, 'tfClassify.html', context)
 
 
@@ -148,7 +148,7 @@ def rgClassifyResult(request):
         request.session['signal_database_id'] = signal_database_id
         # request.session['heatmap'] = cleaned_data.get('heatmap')
 
-        return redirect('/newStates/result')
+        return redirect('/result')
 
 
 
