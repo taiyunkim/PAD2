@@ -25,7 +25,7 @@ SECRET_KEY = 'h_i-2u#oa(_y$%5d0v)3o6u@s(q$%fup$d+v3$y8#4-&p03cn-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.65.125.239', 'localhost']
+ALLOWED_HOSTS = ['10.65.125.239', 'localhost', 'maths.usyd.edu.au']
 
 
 # Application definition
@@ -40,8 +40,8 @@ INSTALLED_APPS = [
 
     # my apps
     'tfclass',
-    'rgclass',
-    'rgclassMMTen',
+    # 'rgclass',
+    # 'rgclassMMTen',
     'stclass',
     # third party apps
     'crispy_forms',
@@ -90,13 +90,14 @@ WSGI_APPLICATION = 'tfpro.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        # 'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.sqlite3'
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'NAME': 'tf_pad', # name of the database
-        'USER': 'taiyun', # database user username
-        'PASSWORD': 'taiyun', # database user password
-        'HOST': 'localhost', # Or an IP Address that your DB is hosted on
-        'PORT': '3306'
+        'NAME': 'tf_pad' # name of the database
+        # 'USER': 'taiyun', # database user username
+        # 'PASSWORD': 'taiyun', # database user password
+        # 'HOST': 'localhost', # Or an IP Address that your DB is hosted on
+        # 'PORT': '3306'
     }
 }
 
@@ -156,7 +157,8 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_env', 'media_root')
+# MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_env', 'media_root')
+MEDIA_ROOT = os.path.join('/savona/nobackup/taiyun/chip-seq', 'media_root')
 
 FILEDATA_URL = '/filedata/'
 
