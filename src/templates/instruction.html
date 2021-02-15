@@ -1,22 +1,56 @@
 <div class="jumbotron">
-    <h1>Welcome to PAD {% if page == 'PADv2' %}v2:</h1> <br /> <h2>Clustering of chromatin regions </h2> {% elif page == 'PADvMMTen' %}(ver. mm10):</h1> <br /> <h2>Clustering of chromatin regions </h2> {% else %}: </h1><br> <h2> Clustering of Proximal And Distal regions from TSS. </h2>{% endif %}
+    {% if page == 'PADv1' %}
+    <h1>Welcome to PAD:</h1>
+    {% elif page == 'newPAD' %}
+    <h1>Welcome to PAD2:</h1>
+    {% endif %}
+    <br /> 
+
+    {% if page == 'PADv1' %}
+    <h2>Clustering of Proximal And Distal regions from TSS.
+    {% elif page == 'newPAD' %}
+    <h2>Clustering by chromatin regions</h2>
+    {% endif %}
+    <br />
     <p><h4>Quick start guide:</h4></p>
     <p>
         1. Select the peaks from the database by clicking the green button.
-        <br>
+        <br />
+	{% if page == 'PADv1' %}
         2. Select the genes annotation to compare the peaks against to.
-        <br>
-        3. Choose your file to upload and compare against the database.
-        <br>
+        <br />
+	{% endif %}
+	{% if page == 'PADv1' %}
+        3. 
+	{% elif page == 'newPAD' %}
+	2. 
+	{% endif %}
+	Choose your file to upload and compare against the database.
+        <br />
         {% if page == 'PADv1' %}
         4. Select the 'cut-off' value which will be the threshold to separate 'proximal' and 'distal'.
-        {% elif page == 'PADv2' %}
-        4. Select the 'region' which you wish to compare.
-        {% elif page == 'PADvMMTen' %}
-        4. Select the 'region' which you wish to compare.
+        {% elif page == 'newPAD' %}
+        3. Select the 'region' which you wish to compare.
         {% endif %}
-        <br>
-        5. Click Submit.
+        <br />
+	{% if page == 'PADv1' %}
+        5. 
+	{% elif page == 'newPAD' %}
+	4.
+	{% endif %}
+	Click Submit.
     </p>
     <a href="{{ MEDIA_URL }}sample/Nfy.bsites" download="sample">Download sample BED file</a>
+
+    <br />
+    <hr />
+    <h3>Reference</h3>
+    
+    {% if page == 'PADv1' %}
+    Integrative analysis identifies co-dependent gene expression regulation of BRG1 and CHD7 at distal regulatory sites in embryonic stem cells (2017) P Yang, A Oldfield, T Kim, A Yang, JYH Yang, JWK Ho, Bioinformatics, 33 (13), 1916-1920, doi: 10.1093/bioinformatics/btx092
+    {% elif page == 'newPAD' %}
+    Integrative Analysis Reveals Histone Demethylase LSD1/KDM1A Associates with RNA Polymerase II Pausing (2020) HJ Kim, T Kim, AJ Oldfield, P Yang, bioRxiv, doi: 10.1101/2020.10.13.338103
+    {% endif %}
+    
+
 </div>

@@ -87,3 +87,4 @@ tmp/*
 
 static_env/media_root/signal_file_db/*
 static_env/media_root/users_peak_files/*
+static_env/media_root/peak_file_db/*

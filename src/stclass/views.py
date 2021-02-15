@@ -202,7 +202,7 @@ def rgClassifyResult(request):
             index2 = signal_database_id.index(f_name2)
 
             ordered_reg_matrix[i][j] = 1-reg_matrix.values[index1][index2]
-        f_order_new[i] = f_order_new[i] + ' (' + str(list(signal_coverage_value.filter(fileID = f_order_new[i]).values_list('value', flat = True))[0]) + ')'
+        f_order_new[i] = f_order_new[i] + ' (' + str(round(list(signal_coverage_value.filter(fileID = f_order_new[i]).values_list('value', flat = True))[0], 3)) + ')'
         # f_order_new[i] = f_order_new[i] + "_a"
         # print(f_order[i])
         # print(f_order_new[i])
