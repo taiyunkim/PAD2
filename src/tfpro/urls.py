@@ -40,7 +40,7 @@ urlpatterns = [
 
     path('PADv1/', tfv.tfClassifyForm),
     path('PADv1/instruction/', tfv.tfClassifyGuide),
-    path('PADv1/result/', tfv.tfClassifyResult),
+    path('PADv1/result/', tfv.tfClassifyResult)
 
 # version that use mm10 Emission regions reported by other people
 #    path('PADmm10/', rgmtv.rgClassifyForm),

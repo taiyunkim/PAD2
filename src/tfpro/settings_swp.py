@@ -92,12 +92,8 @@ DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.mysql',
         'ENGINE': 'django.db.backends.sqlite3',
-
-        # <----------------- 5 Sep 2022 ------------------->
-        'NAME': os.path.join(os.path.dirname(BASE_DIR), 'nobackup', 'db.sqlite3'),
-        # 'NAME': os.path.join('/albona/nobackup/shiny/PAD2/chip-seq', 'db.sqlite3') #  database
-        # --------------------------------------------------
-
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join('/albona/nobackup/shiny/PAD2/chip-seq', 'db.sqlite3') #  database
         # 'USER': 'taiyun', # database user username
         # 'PASSWORD': 'taiyun', # database user password
         # 'HOST': 'localhost', # Or an IP Address that your DB is hosted on
@@ -114,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -161,18 +157,12 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 
-# <----------------- 5 Sep 2022 ------------------->
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'nobackup', 'media_root')
-# MEDIA_ROOT = os.path.join('/albona/nobackup/shiny/PAD2/chip-seq', 'media_root')
-# --------------------------------------------------
+# MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_env', 'media_root')
+MEDIA_ROOT = os.path.join('/albona/nobackup/shiny/PAD2/chip-seq', 'media_root')
 
 FILEDATA_URL = '/filedata/'
 
 FILEDATA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_env', 'filedata_root')
-
-FILE_UPLOAD_HANDLERS = [
-    "django.core.files.uploadhandler.TemporaryFileUploadHandler"
-]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
@@ -184,12 +174,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-
-            # <----------------- 5 Sep 2022 ------------------->
-            'filename': os.path.join(os.path.dirname(BASE_DIR), 'nobackup', 'debug.log'),
-            # 'filename': os.path.join('/albona/nobackup/shiny/PAD2/chip-seq', 'debug.log'),
-            # --------------------------------------------------
-            
+            'filename': os.path.join(BASE_DIR, 'debug.log'),
         },
     },
     'loggers': {

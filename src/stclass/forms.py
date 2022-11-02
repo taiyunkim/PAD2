@@ -40,7 +40,9 @@ class InputForm(forms.Form):
     # gene_database = forms.ChoiceField(choices=GENENAMES_CHOICES, required=True)
 
     # user input signal file
-    signal_File = MultiFileField(min_num=0, required=False, label='Upload custom signal file', help_text='File must be in the form of <br /> chrNum\tstart\tend')
+    signal_File = MultiFileField(min_num=0, required=False, 
+    label='Upload custom signal file <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-original-title="hello"></span>', 
+    help_text='File must be in the form of <br /> chrNum_START\tCOUNT\tRPKM<br />e.g.<br />chr1_1001\t0.0\t0')
 
     # region field
     REGION_CHOICES = (
@@ -66,7 +68,7 @@ class InputForm(forms.Form):
             ("SUE", "Superenhancer [0.09%]")
         ))
     )
-    region = forms.ChoiceField(choices=REGION_CHOICES, required=True, help_text="Help Text here")
+    region = forms.ChoiceField(choices=REGION_CHOICES, required=True, label='Genomic region <span class="my-tooltip" data-toggle="tooltip" title="Hello world"><i class="glyphicon glyphicon-info-sign"></i></span>', help_text="Select the genomic regions you wish to investigate")
 
     # pvalue = forms.FloatField(label="P-Value cut off", max_value=1, min_value=0)
 
@@ -101,7 +103,7 @@ class VariableInputForm(forms.Form):
     # uploaded signal files from user
     USERsignal_CHOICES = ()
     uploaded_signal_File = forms.MultipleChoiceField(choices=USERsignal_CHOICES, required=False)
-    new_signal_File = MultiFileField(min_num=0, required=False, label='Upload custom signal file', help_text='File must be in the form of <br /> chrNum\tstart\tend')
+    new_signal_File = MultiFileField(min_num=0, required=False, label='Upload custom signal files', help_text='File must be in the form of <br /> chrNum_START\tCOUNT\tRPKM<br />e.g.<br />chr1_1001\t0.0\t0')
 
     # region field
     # region field
@@ -128,6 +130,6 @@ class VariableInputForm(forms.Form):
             ("SUE", "Superenhancer [0.09%]")
         ))
     )
-    region = forms.ChoiceField(choices=REGION_CHOICES, required=True, help_text="Help Text here")
+    region = forms.ChoiceField(choices=REGION_CHOICES, required=True, help_text="Select the genomic regions you wish to investigate")
 
     # pvalue = forms.FloatField(label="P-Value cut off", max_value=1, min_value=0)
