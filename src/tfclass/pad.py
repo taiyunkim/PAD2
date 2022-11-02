@@ -1,9 +1,12 @@
+from django.conf import settings
 
 from .models import Peaks_db_file, Peaks_db
 from .function import createPeakToBedFile, calculateJaccardPval, calculateJaccardFC, getPrecomputedJaccardValuePerFile
 
+
 import os
 import math
+
 
 from pybedtools import BedTool as bt
 
@@ -22,7 +25,7 @@ def pos_mats(fname, user_uploaded_filename, matrix_size, cutoff, user_path, pos 
             full_filename_i = Peaks_db.objects.get(fileID=fname[i])
             full_filename_i = full_filename_i.origFile + '_' + pos + '_' + str(cutoff)
             f1 = Peaks_db_file.objects.filter(filename=full_filename_i).values('path')
-            f1 = os.path.join(f1[0]['path'], full_filename_i)
+            f1 = os.path.join(settings.MEDIA_ROOT, f1[0]['path'], full_filename_i)
             file_one_user_uploaded = False
         else:
             full_filename_i = fname[i] + '_' + pos + '_' + str(cutoff)
@@ -39,7 +42,7 @@ def pos_mats(fname, user_uploaded_filename, matrix_size, cutoff, user_path, pos 
                 full_filename_j = full_filename_j.origFile + '_' + pos + '_' + str(cutoff)
 
                 f2 = Peaks_db_file.objects.filter(filename=full_filename_j).values('path')
-                f2 = os.path.join(f2[0]['path'], full_filename_j)
+                f2 = os.path.join(settings.MEDIA_ROOT, f2[0]['path'], full_filename_j)
                 file_two_user_uploaded = False
             else:
                 full_filename_j = fname[j] + '_' + pos + '_' + str(cutoff)

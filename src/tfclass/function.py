@@ -225,7 +225,7 @@ def getPrecomputedJaccardValuePerFile(file_name1):
         for row in cursor.fetchall():
             file_one, file_two, jaccard_index = row
             if file_one == file_name1:
-                jaccard_indices[file_two] = jaccard_index
+                jaccard_indices[file_two] = float(jaccard_index)
             else:
-                jaccard_indices[file_one] = jaccard_index
+                jaccard_indices[file_one] = float(jaccard_index)
     return jaccard_indices

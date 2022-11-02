@@ -47,11 +47,7 @@ var trace00 = [
         z: json_data['reg_matrix'],
         x: m,
         y: m,
-        // text: json_data['regional_pval_matrix'],
         type: 'heatmap',
-        // zmin: regional_fc_limit[0],
-        // zmax: regional_fc_limit[-1],
-        // hoverinfo: 'x+y+z+text',
         hoverinfo: 'x+y+z',
     }
 ];
@@ -118,9 +114,21 @@ var prox_layout = {
 var prox_data = trace.concat(trace00);
 
 // Plot
-Plotly.newPlot('region', prox_data, prox_layout, {displaylogo: false});
+Plotly.newPlot('region', prox_data, prox_layout, {displaylogo: false,
+  modeBarButtonsToRemove: ['toImage', 'sendDataToCloud'],
+  modeBarButtonsToAdd: [{
+    name: 'toImage2',
+    icon: Plotly.Icons.camera,
+    click: function(gd) {
+      Plotly.downloadImage(gd, {format: 'svg'})
+    }
+  }]
+});
 
 console.log("Processing time: "+json_data['proc_time'])
+
+
+
 
 // var svg = document.getElementById("regional");
 
