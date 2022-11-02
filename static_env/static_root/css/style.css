@@ -54,3 +54,12 @@ tfoot input {
     box-sizing: border-box;
 }
 
+
+/* Tooltip container */
+span.my-tooltip, span.my-tooltip:hover, span.my-tooltip:visited {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text*/
+  color: black;
+}
+
