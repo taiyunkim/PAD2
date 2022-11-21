@@ -25,7 +25,7 @@ SECRET_KEY = 'h_i-2u#oa(_y$%5d0v)3o6u@s(q$%fup$d+v3$y8#4-&p03cn-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.65.125.239', 'localhost', 'albona', 'savona', 'pad2.maths.usyd.edu.au']
+ALLOWED_HOSTS = ['10.65.125.239', 'localhost', 'albona', 'savona', 'pad2.maths.usyd.edu.au', 'albona.maths.usyd.edu.au']
 
 
 # Application definition

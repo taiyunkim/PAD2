@@ -47,12 +47,21 @@ def reg_mats(fname, user_uploaded_filename, matrix_size, region, user_path):
             rpkm = pd.concat([rpkm, cur[name]], axis = 1)
         else:
             f_path = os.path.join(user_path, 'output', 'mapped', region)
-
-            curFile = pd.read_csv(f_path+'/'+region+'_'+name, sep = "\t", header = None)
-            curFile.columns = ['chromosome', 'start', 'end', 'count', name]
-            cur = curFile[['chromosome', name]]
-            cur = cur.sort_values(by='chromosome', ascending = True)
-            rpkm = pd.concat([rpkm, cur[name]], axis = 1)
+            
+            try:
+                curFile = pd.read_csv(f_path+'/'+region+'_'+name, sep = "\t", header = None)
+                curFile.columns = ['chromosome', 'start', 'end', 'count', name]
+                cur = curFile[['chromosome', name]]
+                cur = cur.sort_values(by='chromosome', ascending = True)
+                rpkm = pd.concat([rpkm, cur[name]], axis = 1)
+            except pd.errors.EmptyDataError:
+                # curFile = pd.DataFrame(columns = ['chromosome', 'start', 'end', 'count', name])
+                next
+            
+            # curFile.columns = ['chromosome', 'start', 'end', 'count', name]
+            # cur = curFile[['chromosome', name]]
+            # cur = cur.sort_values(by='chromosome', ascending = True)
+            # rpkm = pd.concat([rpkm, cur[name]], axis = 1)
     # Calculate pearson correlation (distance matrix).
     cor_matrix = 1 - rpkm.corr(method = "pearson")
 

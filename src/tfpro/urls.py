@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-# from django.conf.urls import url
+from django.conf.urls import url
 # from django.contrib import admin
 
 from django.conf import settings
@@ -40,7 +40,10 @@ urlpatterns = [
 
     path('PADv1/', tfv.tfClassifyForm),
     path('PADv1/instruction/', tfv.tfClassifyGuide),
-    path('PADv1/result/', tfv.tfClassifyResult)
+    path('PADv1/result/', tfv.tfClassifyResult),
+    
+    url(r'^PADv1/download/(?P<file_name>.*)$', tfv.download),
+    url(r'^download/(?P<file_name>.*)$', stv.download)
 
 # version that use mm10 Emission regions reported by other people
 #    path('PADmm10/', rgmtv.rgClassifyForm),

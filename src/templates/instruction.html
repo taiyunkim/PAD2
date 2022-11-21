@@ -1,15 +1,20 @@
 <div class="jumbotron">
     {% if page == 'PADv1' %}
-    <h1>Welcome to PAD:</h1>
+    <h1>Welcome to PAD</h1>
     {% elif page == 'newPAD' %}
-    <h1>Welcome to PAD2:</h1>
+    <h1>Welcome to PAD2</h1>
     {% endif %}
     <br /> 
 
     {% if page == 'PADv1' %}
     <h2>Clustering of Proximal And Distal regions from TSS.
     {% elif page == 'newPAD' %}
-    <h2>Clustering by chromatin regions</h2>
+    <h2>Clustering by genomic regions</h2>
+        {% comment %} <div class="text-center">
+                <button class="btn btn-lg btn-warning disabled">
+                        <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...
+                </button>
+        </div> {% endcomment %}
     {% endif %}
     <br />
     <p><h4>Quick start guide:</h4></p>
@@ -40,8 +45,16 @@
 	{% endif %}
 	Click Submit.
     </p>
-    <a href="{{ MEDIA_URL }}sample/Nfy.bsites" download="sample">Download sample BED file</a>
-
+    {% if page == "PADv1" %}
+    <a href="download/Nfy.bsites" download="sample_bed">Download a sample BED file</a>
+    {% elif page == "newPAD" %}
+    {% comment %} <a href="download/test1.txt" download="sample">Download an example file</a> {% endcomment %}
+    <hr />
+    <p>An example format of user's input (tab separated) .txt file as follows: </p>
+    <p>CHROMOSOME_START&#9;COUNT&#9;RPKM</p>
+    {% load static %}
+    <img src="{% static 'images/example_file.png' %}" class="img-responsive", style="height: 200px;">
+    {% endif %}
     <br />
     <hr />
     <h3>Reference</h3>

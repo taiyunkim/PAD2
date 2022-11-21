@@ -11,9 +11,11 @@ import time
 
 matplotlib.use('Agg')
 
-# from django.http import HttpResponse
+from django.http import HttpResponse
 # from django.template import loader
-
+from wsgiref.util import FileWrapper
+import mimetypes
+# from django.utils.encoding import smart_str
 
 from django.conf import settings
 from django.shortcuts import render
@@ -160,8 +162,19 @@ def rgClassifyResult(request):
     start_time = time.time()
     reg_matrix = reg_mats(fname, signalfile_names, matrix_size, region, user_path)
 
+    # np.fill_diagonal(reg_matrix.values, 1)
+    
     regional_dist_vector = ssd.squareform(reg_matrix)
     regional_linkage_matrix = linkage(regional_dist_vector, "single", 'euclidean')
+    
+    
+    if len(reg_matrix.columns) != len(f_label_names): # There is an empty file and hence not included
+        new_col = reg_matrix.columns
+        diff = set(fname) - set(new_col)
+        f_label_names = [f_label_names[i] for i, val in enumerate(fname) if val not in diff]
+        matrix_size = len(f_label_names)
+
+    
     regional_dendrogram = dendrogram(regional_linkage_matrix, labels=f_label_names)
     
     f_order = regional_dendrogram['ivl']
@@ -217,3 +230,15 @@ def rgClassifyResult(request):
     }
 
     return render(request, 'tfClassify.html', context)
+
+
+def download(request, file_name):
+    file_path = settings.MEDIA_ROOT +'/sample/'+ file_name
+    f = open(file_path, 'rb')
+    file_wrapper = FileWrapper(f)
+    file_mimetype = mimetypes.guess_type(file_path)
+    response = HttpResponse(file_wrapper, content_type=file_mimetype )
+    response['X-Sendfile'] = file_path
+    response['Content-Length'] = os.stat(file_path).st_size
+    response['Content-Disposition'] = 'attachment; filename=%s' % file_name
+    return response

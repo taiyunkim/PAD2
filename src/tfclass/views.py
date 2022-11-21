@@ -10,9 +10,11 @@ import time
 
 matplotlib.use('Agg')
 
-# from django.http import HttpResponse
+from django.http import HttpResponse
 # from django.template import loader
 
+from wsgiref.util import FileWrapper
+import mimetypes
 
 from django.conf import settings
 from django.shortcuts import render
@@ -309,3 +311,15 @@ def tfClassifyResult(request):
 # === tfClassifyGuide ===
 def tfClassifyGuide(request):
     return render(request, 'tfGuide.html', context={'page':'instruction'})
+
+
+def download(request, file_name):
+    file_path = settings.MEDIA_ROOT +'/sample/'+ file_name
+    f = open(file_path, 'rb')
+    file_wrapper = FileWrapper(f)
+    file_mimetype = mimetypes.guess_type(file_path)
+    response = HttpResponse(file_wrapper, content_type=file_mimetype )
+    response['X-Sendfile'] = file_path
+    response['Content-Length'] = os.stat(file_path).st_size
+    response['Content-Disposition'] = 'attachment; filename=%s' % file_name
+    return response

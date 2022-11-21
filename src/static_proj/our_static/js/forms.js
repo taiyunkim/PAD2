@@ -32,3 +32,9 @@ fillOptions = function() {
 
   // $('#id_selected_peaks').text(filename);
 };
+
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip({
+      placement : 'top'
+  });
+});

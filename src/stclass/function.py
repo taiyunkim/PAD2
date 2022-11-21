@@ -3,7 +3,7 @@ import os
 
 from django.conf import settings
 
-import pybedtools as pb
+# import pybedtools as pb
 from multiprocessing import Pool
 import subprocess
 

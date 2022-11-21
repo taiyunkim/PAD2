@@ -28,7 +28,11 @@ class InputForm(forms.Form):
     """
 
     # selected signal files from datatables
-    selected_field = forms.CharField(widget=forms.Textarea(attrs={'readonly':'readonly','rows':6, 'cols':22, 'style':'resize:none;'}))
+    selected_field = forms.CharField(
+        widget=forms.Textarea(attrs={'readonly':'readonly','rows':6, 'cols':22, 'style':'resize:none;'})
+        # label = 'Upload custom signal file <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="hello <br> world"></span>'
+    
+    )
 
     # path = os.path.join(settings.STATIC_ROOT, 'csv', 'genenames.csv')
     # with open(path, 'r') as csvfile:
@@ -40,10 +44,12 @@ class InputForm(forms.Form):
     # gene_database = forms.ChoiceField(choices=GENENAMES_CHOICES, required=True)
 
     # user input signal file
-    signal_File = MultiFileField(min_num=0, required=False, 
-    label='Upload custom signal file <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-original-title="hello"></span>', 
-    help_text='File must be in the form of <br /> chrNum_START\tCOUNT\tRPKM<br />e.g.<br />chr1_1001\t0.0\t0')
-
+    signal_File = MultiFileField(
+        min_num=0, 
+        required=False, 
+        label = 'Upload custom signal file <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-original-title="File must be in the form similar to the example file. e.g.chr1_1001\t0.0\t0"></span>'
+    )
+    
     # region field
     REGION_CHOICES = (
         ("chromHMM", (
@@ -68,7 +74,11 @@ class InputForm(forms.Form):
             ("SUE", "Superenhancer [0.09%]")
         ))
     )
-    region = forms.ChoiceField(choices=REGION_CHOICES, required=True, label='Genomic region <span class="my-tooltip" data-toggle="tooltip" title="Hello world"><i class="glyphicon glyphicon-info-sign"></i></span>', help_text="Select the genomic regions you wish to investigate")
+    region = forms.ChoiceField(
+        choices=REGION_CHOICES, 
+        required=True, 
+        label = 'Genomic region <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-original-title="Select the genomic regions you wish to investigate"></span>'
+    )
 
     # pvalue = forms.FloatField(label="P-Value cut off", max_value=1, min_value=0)
 
@@ -103,7 +113,11 @@ class VariableInputForm(forms.Form):
     # uploaded signal files from user
     USERsignal_CHOICES = ()
     uploaded_signal_File = forms.MultipleChoiceField(choices=USERsignal_CHOICES, required=False)
-    new_signal_File = MultiFileField(min_num=0, required=False, label='Upload custom signal files', help_text='File must be in the form of <br /> chrNum_START\tCOUNT\tRPKM<br />e.g.<br />chr1_1001\t0.0\t0')
+    new_signal_File = MultiFileField(
+        min_num=0, 
+        required=False, 
+        label = 'Upload custom signal file <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-original-title="File must be in the form similar to the example file. e.g.chr1_1001\t0.0\t0"></span>'
+    )
 
     # region field
     # region field
@@ -130,6 +144,10 @@ class VariableInputForm(forms.Form):
             ("SUE", "Superenhancer [0.09%]")
         ))
     )
-    region = forms.ChoiceField(choices=REGION_CHOICES, required=True, help_text="Select the genomic regions you wish to investigate")
+    region = forms.ChoiceField(
+        choices=REGION_CHOICES, 
+        required=True, 
+        label = 'Genomic region <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-original-title="Select the genomic regions you wish to investigate"></span>'
+    )
 
     # pvalue = forms.FloatField(label="P-Value cut off", max_value=1, min_value=0)

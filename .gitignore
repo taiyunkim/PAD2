@@ -20,6 +20,13 @@ tests/report/
 credentials.py
 credentials.pyc
 
+nobackup*
+PAD2venv*
+.DS_Store
+src_2
+tmp_folder
+output.txt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -4,7 +4,8 @@
 {% block panel %}
 
 {% if matrix %}
-    <script src="{% static 'js/plotly-latest.min.js' %}"></script>
+    {% comment %} <script src="{% static 'js/plotly-latest.min.js' %}"></script> {% endcomment %}
+    <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
 {% endif %}
 
 <div class="row">
@@ -28,9 +29,11 @@
             <script type="text/javascript" src="{% static 'js/distal.js' %}"></script>
             <p>White tile indicates non-significant value.</p>
         {% elif matrix and app == 'reg' %}
-            <div class="text-center">
-                <div class="spinner-border" role="status"></div>
-            </div>
+            {% comment %} <div class="text-center">
+                <button class="btn btn-lg btn-warning disabled">
+                    <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...
+                </button>
+            </div> {% endcomment %}
             <h2 class="page-header heatmap-title">Correlation of Chip-seq by regions ({{region}}) </h2>
 	        <div id="region" class="plotly-container"></div>
             <script type="text/javascript">var json_data = {{json_data|safe}};</script>

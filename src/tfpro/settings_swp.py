@@ -157,8 +157,8 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 
-# MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_env', 'media_root')
-MEDIA_ROOT = os.path.join('/albona/nobackup/shiny/PAD2/chip-seq', 'media_root')
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_env', 'media_root')
+# MEDIA_ROOT = os.path.join('/albona/nobackup/shiny/PAD2/chip-seq', 'media_root')
 
 FILEDATA_URL = '/filedata/'
 
