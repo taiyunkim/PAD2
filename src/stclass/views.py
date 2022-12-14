@@ -23,10 +23,10 @@ from django.shortcuts import redirect
 
 from django.forms import widgets
 
-from .forms import InputForm, VariableInputForm
+from .forms import InputForm, VariableInputForm, PlotInputFileForm
 from .function import createPeakToBedFile
 # from .function import
-from rgclass.models import Signal_db
+from .models import Signal_db
 from .models import Signal_state_db_info
 
 from .reg import reg_mats
@@ -86,6 +86,7 @@ def rgClassifyForm(request):
         request.session['signal_database_names'] = signal_database_names
         request.session['signalfile_names'] = signalfile_names
         request.session['signal_database_id'] = signal_database_id
+    
         
         return redirect('/result')
     return render(request, 'tfClassify.html', context)
@@ -114,6 +115,21 @@ def rgClassifyResult(request):
     # leave previous choices at field
     form.fields['uploaded_signal_File'].choices = signalfile_choices
 
+    plotForm = PlotInputFileForm(
+        request.POST or None,
+        request.FILES or None
+        
+    )
+    db_files = [(s_name, s_id) for s_id,s_name in zip(signal_database_id,signal_database_names)]
+    upload_files = [(s_id, s_id) for s_id in signalfile_names]
+    FILE_CHOICES = (
+       tuple(("Database", tuple(db_files))),
+        tuple(("User upload", tuple(upload_files)))
+    )
+    # FILE_CHOICES = db_files + upload_files
+    plotForm.fields['input_files'].choices = FILE_CHOICES
+    
+    
     if form.is_valid():
         cleaned_data = form.cleaned_data
         region = cleaned_data.get('region')
@@ -140,7 +156,7 @@ def rgClassifyResult(request):
         request.session['signalfile_names'] = signalfile_names
         request.session['signal_database_id'] = signal_database_id
 
-
+        
         region = cleaned_data.get('region')
         signal_name_strings = cleaned_data.get('selected_field')
         signal_database_id = signal_name_strings.rstrip().split()
@@ -207,6 +223,11 @@ def rgClassifyResult(request):
         # f_order_new[i] = f_order_new[i]
         
     proc_time = time.time()-start_time
+    
+    
+    
+    
+    
     json_data = json.dumps(
         {
             'reg_matrix': ordered_reg_matrix,
@@ -220,13 +241,17 @@ def rgClassifyResult(request):
 
     context = {
         'form': form,
+        'plotForm': plotForm,
         'table': table,
         'signalfile_names': signalfile_names,
         'json_data': json_data,
         'app': "reg",
         'region': region,
         'matrix': True,
-        'page': "newPAD"
+        'page': "newPAD",
+        'signal_database_names': signal_database_names,
+        'signal_database_id': signal_database_id,
+        'f_label_names': f_label_names
     }
 
     return render(request, 'tfClassify.html', context)

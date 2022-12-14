@@ -9,7 +9,8 @@
 {% endif %}
 
 <div class="row">
-    {% include 'sidebar.html' with heatmap='{{proximal_dendrogram}}'%}
+    {% comment %} {% include 'sidebar.html' with heatmap='{{proximal_dendrogram}}'%} {% endcomment %}
+    {% include 'sidebar.html' %}
     <div class="col-xs-9" id=heatmap>
         {% if not matrix and not app %}
             {% include 'instruction.html' %}
@@ -44,6 +45,8 @@
     {% include 'peak_db_selection.html' %}
     {% include 'plot_peak_selection.html' %}
     {% include 'plot.html' %}
+    {% comment %} {% include 'rank_plot_signal_selection.html' %} {% endcomment %}
+    {% include 'rank_plot.html' %}
     
 </div>
 {% endblock %}

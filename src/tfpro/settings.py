@@ -40,8 +40,8 @@ INSTALLED_APPS = [
 
     # my apps
     'tfclass',
-    'rgclass',
-    'rgclassMMTen',
+    # 'rgclass',
+    # 'rgclassMMTen',
     'stclass',
     # third party apps
     'crispy_forms',

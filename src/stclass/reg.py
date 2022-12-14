@@ -1,7 +1,7 @@
 
 from django.conf import settings
 
-from rgclass.models import Signal_db
+from .models import Signal_db
 # from .function import createPeakToBedFile, calculateJaccardPval, calculateJaccardFC, getPrecomputedJaccardValuePerFile
 # from .function import calculatePearsonCor
 

@@ -151,3 +151,29 @@ class VariableInputForm(forms.Form):
     )
 
     # pvalue = forms.FloatField(label="P-Value cut off", max_value=1, min_value=0)
+
+
+class PlotInputFileForm(forms.Form):
+    """
+    The PlotInputFileForm class is a form for users re-submission.
+    A number of fields are required from user to select or upload.
+    **selected_signals** - selected signals from the datatables (signals from database chosen for analysis).
+    **new_signal_File** - (optional) user's signal file upload field where it can be 1 or more files.
+    **cut_off** - a threshold cut off to determine proximal and distal.
+    **heatmap** - an option to generate heatmap axis ordering.
+            (
+                Independent: proximal and distal each separately show clustering.
+                Follow prioximal: distal will not cluster and distal heatmap axis ordering will follow proximal heatmap axis ordering.
+                Follow distal: proximal will not cluster and proximal heatmap axis ordering will follow distal heatmap axis ordering.
+            )
+    """
+    input_files = forms.ChoiceField(
+        choices=(),
+        required=True,
+        label="Input file"
+    )
+    # uploaded_plot_File = forms.ChoiceField(
+    #     choices=(),
+    #     required=True,
+    #     label="Upload file"
+    # )

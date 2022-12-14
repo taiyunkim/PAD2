@@ -17,6 +17,13 @@
                 </div>
             </div>
         </div>
-    
+    {% elif matrix and app == 'reg' %}
+        <div class="sidebar-nav">
+            <div class="navbar navbar-default" role="navigation">
+                <div class='navbar-collapse collapse sidebar-navebar-collapse'>
+                    {% include 'rank_plot_form.html' %}
+                </div>
+            </div>
+        </div>
     {% endif %}
 </div>

@@ -24,8 +24,8 @@ from django.conf.urls.static import static
 
 # import tfclass.views
 from tfclass import views as tfv
-from rgclass import views as rgv
-from rgclassMMTen import views as rgmtv
+# from rgclass import views as rgv
+# from rgclassMMTen import views as rgmtv
 from stclass import views as stv
 
 urlpatterns = [
