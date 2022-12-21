@@ -14,8 +14,17 @@
             </button>
         {% endif%}
     </div>
-    {{ form | crispy }}
-    <input id="submit-user-input" class='btn btn-primary btn-block' type="submit" value="Submit" />
+    {% comment %} {{ form | crispy }} {% endcomment %}
+    {% crispy form %}
+   
+{% endblock %}
+
+{% block additional_form %}
+    
+{% endblock %}
+
+{% block submit_form %}
+    {% comment %} <input id="submit-user-input" class='btn btn-primary btn-block' type="submit" value="Submit" /> {% endcomment %}
 {% endblock %}
 
 {% block include_html %}

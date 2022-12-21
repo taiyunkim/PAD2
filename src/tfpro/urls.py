@@ -33,7 +33,7 @@ urlpatterns = [
 
     path('', stv.rgClassifyForm),
     path('result/', stv.rgClassifyResult),
-
+    
 # version that inlcude OSN
 #   path('', rgv.rgClassifyForm),
 #   path('result/', rgv.rgClassifyResult),

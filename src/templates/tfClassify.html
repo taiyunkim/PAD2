@@ -35,10 +35,17 @@
                     <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...
                 </button>
             </div> {% endcomment %}
-            <h2 class="page-header heatmap-title">Correlation of Chip-seq by regions ({{region}}) </h2>
+            <h2 class="page-header heatmap-title">Correlation of Chip-seq by regions </h2>
 	        <div id="region" class="plotly-container"></div>
+
+            {% if rank_plot %}
+                <h2>Rankings of the signals in group '{{category}}'</h2>
+                <div id="region_rank" class="plotly-container"></div>
+
+            {% endif %}
             <script type="text/javascript">var json_data = {{json_data|safe}};</script>
             <script type="text/javascript" src="{% static 'js/reg.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/rank_scatter.js' %}"></script>
         {% endif %}
     </div>
     {% include 'signal_db_selection.html' %}
@@ -46,7 +53,7 @@
     {% include 'plot_peak_selection.html' %}
     {% include 'plot.html' %}
     {% comment %} {% include 'rank_plot_signal_selection.html' %} {% endcomment %}
-    {% include 'rank_plot.html' %}
+    {% comment %} {% include 'rank_plot.html' %} {% endcomment %}
     
 </div>
 {% endblock %}

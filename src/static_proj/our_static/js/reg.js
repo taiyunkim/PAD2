@@ -130,37 +130,37 @@ console.log("Processing time: "+json_data['proc_time'])
 
 
 
-// var svg = document.getElementById("regional");
+// // var svg = document.getElementById("regional");
 
-var svg = document.getElementById("region").getElementsByClassName("main-svg")
+// var svg = document.getElementById("region").getElementsByClassName("main-svg")
 
-var output_svg = svg[0].cloneNode()
+// var output_svg = svg[0].cloneNode()
 
-for (let svg_node of svg) {
-    for (let child_node of svg_node.childNodes) {
-        if (child_node.tagName == "g") {
-            output_svg.appendChild(child_node.cloneNode(true))
-        }
-    }
-}
+// for (let svg_node of svg) {
+//     for (let child_node of svg_node.childNodes) {
+//         if (child_node.tagName == "g") {
+//             output_svg.appendChild(child_node.cloneNode(true))
+//         }
+//     }
+// }
 
-var serializer = new XMLSerializer();
+// var serializer = new XMLSerializer();
 
-var source = serializer.serializeToString(output_svg);
+// var source = serializer.serializeToString(output_svg);
 
-//add name spaces.
-if(!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)){
-    source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
-}
-if(!source.match(/^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/)){
-    source = source.replace(/^<svg/, '<svg xmlns:xlink="http://www.w3.org/1999/xlink"');
-}
+// //add name spaces.
+// if(!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)){
+//     source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+// }
+// if(!source.match(/^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/)){
+//     source = source.replace(/^<svg/, '<svg xmlns:xlink="http://www.w3.org/1999/xlink"');
+// }
 
-//add xml declaration
-source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+// //add xml declaration
+// source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
 
-//convert svg source to URI data scheme.
-var url = "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(source);
-//set url value to a element's href attribute.
-document.getElementById("regionalSvg").href = url;
-//you can download svg file by right click menu.
+// //convert svg source to URI data scheme.
+// var url = "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(source);
+// //set url value to a element's href attribute.
+// document.getElementById("regionalSvg").href = url;
+// //you can download svg file by right click menu.

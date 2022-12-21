@@ -3,12 +3,13 @@
 
 
 {% block form_content %}
-    <h3 class="page-header sidebar-form-name">Ranked correlation</h3>
-    <p class="help-block">Visualise ranked correlation in their groups.</p>
+    <h4 class="page-header sidebar-form-name">
+        Optional
+    </h4>
+    {% comment %} <p class="help-block">Visualise ranked correlation by category.</p> {% endcomment %}
     {{ plotForm | crispy }}
-    <button type="button" id="rankplotButton" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#rankplot">
-        Plot
-    </button>
+    
+    
 {% endblock %}
 
 {% block include_html %}

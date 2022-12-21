@@ -2,6 +2,11 @@ from django import forms
 from django.conf import settings
 
 from multiupload.fields import MultiFileField
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, Submit
+
+from .models import Signal_db
+
 
 from .function import checkSignalFile
 
@@ -33,15 +38,6 @@ class InputForm(forms.Form):
         # label = 'Upload custom signal file <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="hello <br> world"></span>'
     
     )
-
-    # path = os.path.join(settings.STATIC_ROOT, 'csv', 'genenames.csv')
-    # with open(path, 'r') as csvfile:
-    #     reader = csv.reader(csvfile)
-    #     genenames_list = list(map(tuple, reader))
-    #
-    # genenames_tuple = tuple(genenames_list)
-    # GENENAMES_CHOICES = genenames_tuple
-    # gene_database = forms.ChoiceField(choices=GENENAMES_CHOICES, required=True)
 
     # user input signal file
     signal_File = MultiFileField(
@@ -79,17 +75,60 @@ class InputForm(forms.Form):
         required=True, 
         label = 'Genomic region <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-original-title="Select the genomic regions you wish to investigate"></span>'
     )
-
-    # pvalue = forms.FloatField(label="P-Value cut off", max_value=1, min_value=0)
-
+    rank_plot = forms.BooleanField(
+        required=False,
+        label=
+            'Plot ranked correlation <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-original-title="Visualise ranked correlation of the input file with other similar type of proteins.\n\n Note: This requires computing correlation against all the files in the database from the same category and thus may take a few more minutes to compute."></span>')
+    interest = forms.ChoiceField(
+        choices=(),
+        # queryset=Signal_db.objects.none(),
+        required=False,
+        label="Interest"
+    )
+    # category = forms.ChoiceField(
+    #     choices = (),
+    #     required = False
+    # )
+    
 
     #validating input
     def clean(self):
         cleaned_data = super(InputForm, self).clean()
         signal_File = cleaned_data.get('signal_File')
+        selected_field = cleaned_data.get('selected_field')
+        # category = cleaned_data.get('category')
+        rank_plot = cleaned_data.get('rank_plot')
         if (signal_File is not None) and (not checkSignalFile(signal_File)):
             raise forms.ValidationError({'signal_File': ["Invalid file format.",]})
+        if selected_field is not None: selected_field = selected_field.rstrip().split()
+        if (selected_field is None) or (len(selected_field) < 2):
+            raise forms.ValidationError({'selected_field': ["You need to select at least 2 signal files from the database to proceed.",]})
+        
+        # selected_category = Signal_db.objects.filter(fileID__in = selected_field, category = category)
+        
+        # if (rank_plot) and (len(list(selected_category)) < 1):
+        #     raise forms.ValidationError({'category': ["You need at least 1 signal files from the database in this category to plot.",]})
 
+    def __init__(self, *args, **kwargs):
+        super(InputForm, self).__init__(*args, **kwargs)
+        # self.fields['category'].choices = Signal_db.objects.all().values_list("category","category").distinct()
+        
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset(
+                '',
+                'selected_field',
+                'signal_File',
+                'region'
+            ),
+            Fieldset(
+                '[Optional] Correlation ranks',
+                'rank_plot',
+                'interest',
+                # 'category'
+            ),
+            Submit('submit', 'Submit', css_class='button white')
+        )
 
 
 
@@ -150,30 +189,64 @@ class VariableInputForm(forms.Form):
         label = 'Genomic region <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-original-title="Select the genomic regions you wish to investigate"></span>'
     )
 
+    
+    rank_plot = forms.BooleanField(
+        required=False,
+        label=
+            'Plot ranked correlation <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-original-title="Visualise ranked correlation of the input file with other similar type of proteins.\n\n Note: This requires computing correlation against all the files in the database from the same category and thus may take a few more minutes to compute."></span>')
+    
+    interest = forms.ChoiceField(
+        choices=(),
+        required=False,
+        label="Interests"
+    )
+    category = forms.ChoiceField(
+        choices = (),
+        required = False
+    )
+    
     # pvalue = forms.FloatField(label="P-Value cut off", max_value=1, min_value=0)
 
-
-class PlotInputFileForm(forms.Form):
-    """
-    The PlotInputFileForm class is a form for users re-submission.
-    A number of fields are required from user to select or upload.
-    **selected_signals** - selected signals from the datatables (signals from database chosen for analysis).
-    **new_signal_File** - (optional) user's signal file upload field where it can be 1 or more files.
-    **cut_off** - a threshold cut off to determine proximal and distal.
-    **heatmap** - an option to generate heatmap axis ordering.
-            (
-                Independent: proximal and distal each separately show clustering.
-                Follow prioximal: distal will not cluster and distal heatmap axis ordering will follow proximal heatmap axis ordering.
-                Follow distal: proximal will not cluster and proximal heatmap axis ordering will follow distal heatmap axis ordering.
-            )
-    """
-    input_files = forms.ChoiceField(
-        choices=(),
-        required=True,
-        label="Input file"
-    )
-    # uploaded_plot_File = forms.ChoiceField(
-    #     choices=(),
-    #     required=True,
-    #     label="Upload file"
-    # )
+    def __init__(self, *args, **kwargs):
+        super(VariableInputForm, self).__init__(*args, **kwargs)
+        # self.fields['category'].choices = Signal_db.objects.all().values_list("category","category").distinct()
+        # self.fields['interest'].choices = 
+        
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset(
+                '',
+                'selected_field',
+                'uploaded_signal_File',
+                'new_signal_File',
+                'region'
+            ),
+            Fieldset(
+                '[Optional] Correlation ranks',
+                'rank_plot',
+                'interest',
+                # 'category'
+            ),
+            Submit('submit', 'Submit', css_class='button white')
+        )
+    
+    #validating input
+    def clean(self):
+        cleaned_data = super(VariableInputForm, self).clean()
+        uploaded_signal_File = cleaned_data.get('uploaded_signal_File')
+        
+        selected_field = cleaned_data.get('selected_field')
+        # category = cleaned_data.get('category')
+        # rank_plot = cleaned_data.get('rank_plot')
+        new_signal_File = cleaned_data.get('new_signal_File')
+        
+        if (new_signal_File is not None) and (not checkSignalFile(new_signal_File)):
+            raise forms.ValidationError({'new_signal_File': ["Invalid file format.",]})
+        if selected_field is not None: selected_field = selected_field.rstrip().split()
+        if (selected_field is None) or (len(selected_field) < 2):
+            raise forms.ValidationError({'selected_field': ["You need to select at least 2 signal files from the database to proceed.",]})
+        
+        # selected_category = Signal_db.objects.filter(fileID__in = selected_field, category = category)
+        
+        # if (rank_plot) and (len(list(selected_category)) < 1):
+        #     raise forms.ValidationError({'category': ["You need at least 1 signal files from the database in this category to plot.",]})
