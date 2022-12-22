@@ -83,7 +83,7 @@ class InputForm(forms.Form):
         choices=(),
         # queryset=Signal_db.objects.none(),
         required=False,
-        label="Interest"
+        label="Anchor"
     )
     # category = forms.ChoiceField(
     #     choices = (),
@@ -198,7 +198,7 @@ class VariableInputForm(forms.Form):
     interest = forms.ChoiceField(
         choices=(),
         required=False,
-        label="Interests"
+        label="Anchor"
     )
     category = forms.ChoiceField(
         choices = (),

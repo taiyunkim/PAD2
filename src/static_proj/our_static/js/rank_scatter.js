@@ -10,6 +10,7 @@ var cor;
 var fileID;
 var interest;
 var category;
+var interest_id;
 if (json_data['cor'] != "None") {
     cor = json_data['cor'];
 }
@@ -25,6 +26,10 @@ if (json_data['interest_name'] != "None") {
 if (json_data['category'] != "None") {
     category = json_data['category'];
 }
+if (json_data['interest_id'] != "None") {
+    interest_id = json_data['interest_id'];
+}
+console.log(interest_id);
 
 var ranking = [];
 for (i = 1;  i <= fileID.length; i++){
@@ -79,10 +84,12 @@ var config = {
     }]
 }
 
-let id = filename.indexOf(interest);
+// let id = filename.indexOf(interest);
+// console.log(interest);
 // console.log(id);
+// console.log(filename);
 // var interest_file = index.map(i => fileID[i]);
-var interest_file = fileID.at(id);
+// var interest_file = fileID.at(id);
 // console.log(interest_file);
 var layout = {
     xaxis: {
@@ -93,7 +100,7 @@ var layout = {
         title: "Correlations"
         // range: [,8]
     },
-    title: interest_file
+    title: interest_id
 }
 
 Plotly.newPlot('region_rank', data, layout, config);

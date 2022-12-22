@@ -64,6 +64,7 @@ def rgClassifyForm(request):
     if (request.POST.get('interest') is not None):
         interest_choices = request.POST.get('interest')
         form.fields['interest'].choices = [(interest_choices, interest_choices)]
+    
     context = {
         'form': form,
         'table': table,
@@ -221,7 +222,14 @@ def rgClassifyResult(request):
         category_db_names = category_db_names + signalfile_names
         category_cor = full_matrix.loc[category_db_names, [interest]]
         category_cor['fileID'] = list(fileID) + signalfile_names
+        # print(category_cor)
         # interest correlation column
+        interest_id = category_cor.loc[category_cor.index == interest, 'fileID']
+        # print(category_cor)
+        # interest_id = interest_id.tolist()
+        # print(interest_id)
+        if (len(interest_id)):
+            interest_id = interest_id[0]
         category_db_names_subset = [s for s in category_db_names if s not in interest]
         
         # category_db_names_subset = category_db_names_subset + signalfile_names
@@ -236,6 +244,7 @@ def rgClassifyResult(request):
         
         filename = [s for s in category_cor.index]
         fileID = [s for s in category_cor['fileID']]
+        # print(category_cor)
         cor = [s for s in category_cor[interest]]
         
         
@@ -304,6 +313,7 @@ def rgClassifyResult(request):
             'filename': filename,
             'cor': cor,
             'interest_name': interest,
+            'interest_id': interest_id,
             'category': category
             # 'category_cor': category_cor.to_json(orient="columns")
         }
