@@ -43,7 +43,7 @@ class InputForm(forms.Form):
     signal_File = MultiFileField(
         min_num=0, 
         required=False, 
-        label = 'Upload custom signal file <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-original-title="File must be in the form similar to the example file. e.g.chr1_1001\t0.0\t0"></span>'
+        label = '[Optional] Upload custom signal file <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-original-title="File must be in the form similar to the example file. e.g.chr1_1001\t0.0\t0"></span>'
     )
     
     # region field
@@ -67,7 +67,8 @@ class InputForm(forms.Form):
         ("Additional", (
             ("IRS", "IRS [0.07%]"),
             ("PRS", "PRS [0.28]"),
-            ("SUE", "Superenhancer [0.09%]")
+            ("SUE", "Superenhancer [0.09%]"),
+            ("WG", "Whole Genome [100%]")
         ))
     )
     region = forms.ChoiceField(
@@ -155,7 +156,7 @@ class VariableInputForm(forms.Form):
     new_signal_File = MultiFileField(
         min_num=0, 
         required=False, 
-        label = 'Upload custom signal file <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-original-title="File must be in the form similar to the example file. e.g.chr1_1001\t0.0\t0"></span>'
+        label = '[Optional] Upload custom signal file <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-original-title="File must be in the form similar to the example file. e.g.chr1_1001\t0.0\t0"></span>'
     )
 
     # region field
@@ -180,7 +181,8 @@ class VariableInputForm(forms.Form):
         ("Additional", (
             ("IRS", "IRS [0.07%]"),
             ("PRS", "PRS [0.28]"),
-            ("SUE", "Superenhancer [0.09%]")
+            ("SUE", "Superenhancer [0.09%]"),
+            ("WG", "Whole Genome [100%]")
         ))
     )
     region = forms.ChoiceField(
