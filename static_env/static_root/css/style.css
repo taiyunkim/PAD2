@@ -1,0 +1,65 @@
+/*
+file: our_static/css/style.css
+author: Taiyun Kim
+date: Mar 2016
+CSS file for the website
+*/
+
+/* make sidebar nav vertical */ 
+@media (min-width: 768px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+  }
+  .sidebar-nav .navbar ul:not {
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+
+.modal-dialog {
+  max-height: 80%;
+}
+
+.modal-body {
+  max-height: calc(100vh - 212px);
+  overflow-y: auto;
+}
+
+#modalButton {
+  background-color: green;
+}
+
+.sidebar-form {
+  padding: 10px;
+}
+
+.highlight_row {
+    background: #eee;
+}
+
+tfoot input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+
+/* Tooltip container */
+span.my-tooltip, span.my-tooltip:hover, span.my-tooltip:visited {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text*/
+  color: black;
+}
+

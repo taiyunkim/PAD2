@@ -1,0 +1,16 @@
+{% extends 'forms.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block form_content %}
+    <h4 class="page-header sidebar-form-name">
+        Optional
+    </h4>
+    {% comment %} <p class="help-block">Visualise ranked correlation by category.</p> {% endcomment %}
+    {{ plotForm | crispy }}
+    
+    
+{% endblock %}
+
+{% block include_html %}
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'modal.html' %}
+{% load staticfiles %}
+
+{% block div_id_size %}
+    <div class="modal fade" id="rankplot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+{% endblock %}
+
+{% block modal_title %}
+    <h3 class="modal-title" id='none'>Ranked scatter plot</h3>
+{% endblock %}
+
+{% block modal_body_main %}
+    {% comment %} <a id=scatterPlot href="" download="scatterPlot.svg">Download plot as SVG</a> {% endcomment %}
+    <div id="myRankedDiv" style="width: 580px; height: 400px; margin-left:auto; margin-right:auto;"></div>
+{% endblock %}
+
+{% block modal_footer %}
+    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+{% endblock %}
+
+{% block modal_script %}
+    <script type="text/javascript" src="{% static 'js/scatterplot.js' %}"></script>
+{% endblock %}

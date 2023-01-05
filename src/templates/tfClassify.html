@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block panel %}
+
+{% if matrix %}
+    {% comment %} <script src="{% static 'js/plotly-latest.min.js' %}"></script> {% endcomment %}
+    <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
+{% endif %}
+
+<div class="row">
+    {% comment %} {% include 'sidebar.html' with heatmap='{{proximal_dendrogram}}'%} {% endcomment %}
+    {% include 'sidebar.html' %}
+    <div class="col-xs-9" id=heatmap>
+        {% if not matrix and not app %}
+            {% include 'instruction.html' %}
+        {% endif %}
+
+        {% if matrix and app == 'pad' %}
+            <h2 class="page-header heatmap-title">Correlation of TSS Proximal sites</h2>
+            <a id=proximalSvg href="" download="proximal.svg">Download proximal plot as SVG</a>
+            <div id="proximal" class="plotly-container"></div>
+            <script type="text/javascript">var json_data = {{json_data|safe}};</script>
+            <script type="text/javascript" src="{% static 'js/proximal.js' %}"></script>
+            <p>White tile indicates non-significant value.</p>
+            <h2 class="page-header heatmap-title">Correlation of TSS Distal sites</h2>
+            <a id=distalSvg href="" download="distal.svg">Download distal plot as SVG</a>
+            <div id="distal" class="plotly-container"></div>
+            <script type="text/javascript">var json_data = {{json_data|safe}};</script>
+            <script type="text/javascript" src="{% static 'js/distal.js' %}"></script>
+            <p>White tile indicates non-significant value.</p>
+        {% elif matrix and app == 'reg' %}
+            {% comment %} <div class="text-center">
+                <button class="btn btn-lg btn-warning disabled">
+                    <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...
+                </button>
+            </div> {% endcomment %}
+            <h2 class="page-header heatmap-title">Correlation of Chip-seq by regions </h2>
+	        <div id="region" class="plotly-container"></div>
+
+            {% if rank_plot %}
+                <h2>Rankings of the signals in group '{{category}}'</h2>
+                <div id="region_rank" class="plotly-container"></div>
+
+            {% endif %}
+            <script type="text/javascript">var json_data = {{json_data|safe}};</script>
+            <script type="text/javascript" src="{% static 'js/reg.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/rank_scatter.js' %}"></script>
+        {% endif %}
+    </div>
+    {% include 'signal_db_selection.html' %}
+    {% include 'peak_db_selection.html' %}
+    {% include 'plot_peak_selection.html' %}
+    {% include 'plot.html' %}
+    {% comment %} {% include 'rank_plot_signal_selection.html' %} {% endcomment %}
+    {% comment %} {% include 'rank_plot.html' %} {% endcomment %}
+    
+</div>
+{% endblock %}

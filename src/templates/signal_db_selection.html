@@ -1,0 +1,61 @@
+{% extends 'modal.html' %}
+{% load staticfiles %}
+
+{% block div_id_size %}
+    <div class="modal fade" id="signal_db_select" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+{% endblock %}
+
+{% block modal_title %}
+    <h3 class="modal-title" id="myModalLabel">Select signals from database</h3>
+{% endblock %}
+{% block modal_body_main %}
+    {% comment %} <table border="0" cellspacing="5" cellpadding="5">
+        <tbody>
+            <tr>
+                <td><strong>Filter by number of signals: </strong></td>
+                <td>&nbsp;</td>
+                <td>minimum: <input type="text" id="min" name="min" size="6"></td>
+                <td>&nbsp;</td>
+                <td>maximum: <input type="text" id="max" name="max" size="6"></td>
+            </tr>
+        </tbody>
+    </table> {% endcomment %}
+
+    <table id="table" class="table table-hover">
+        <thead>
+            <tr class="active" id="table-head">
+                <th class="col-md-1 text-center">File ID</th>
+                <th class="col-md-1 text-center">Filename</th>
+                <th class="col-md-1 text-center">Group</th>
+                
+            </tr>
+        </thead>
+        <tfoot>
+            <tr class="active" id="table-foot">
+                <th class="col-md-1 text-center">File ID</th>
+                <th class="col-md-1 text-center">Filename</th>
+                <th class="col-md-1 text-center">Group</th>
+                
+            </tr>
+        </tfoot>
+        <tbody id=table-body>
+            {% for row in table %}
+            <tr class="rows" id={{row.fileID}}>
+                <td class="col-md-1 text-center" value={{row.fileID}}>{{row.fileID}}</td>
+                <td class="col-md-1 text-center" value={{row.filename}}>{{row.filename}}</td>
+                <td class="col-md-1 text-center" value={{row.category}}>{{row.category}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block modal_footer %}
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button type="button" id="btnSave2" class="btn btn-primary" data-dismiss="modal" onclick='saveSelect()'>Save</button>
+{% endblock %}
+
+{% block modal_script %}
+    <script type="text/javascript" src="{% static 'js/signalTable.js' %}"></script>
+{% endblock %}

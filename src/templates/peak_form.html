@@ -1,0 +1,31 @@
+{% extends 'forms.html' %}
+{% load crispy_forms_tags %}
+
+{% block form_content %}
+    <!-- <h3 class="page-header sidebar-form-name">Submission Form</h3> -->
+    <div class="form-group">
+        {% if page == 'PADv1' %}
+            <button id="modalButton" type="button" class="btn btn-default btn-block btn-sm" data-toggle="modal" data-target="#peak_db_select">
+            Select peaks from database
+            </button>
+        {% elif page == 'newPAD' %}
+            <button id="modalButton" type="button" class="btn btn-default btn-block btn-sm" data-toggle="modal" data-target="#signal_db_select">
+            Select signals from the database
+            </button>
+        {% endif%}
+    </div>
+    {% comment %} {{ form | crispy }} {% endcomment %}
+    {% crispy form %}
+   
+{% endblock %}
+
+{% block additional_form %}
+    
+{% endblock %}
+
+{% block submit_form %}
+    {% comment %} <input id="submit-user-input" class='btn btn-primary btn-block' type="submit" value="Submit" /> {% endcomment %}
+{% endblock %}
+
+{% block include_html %}
+{% endblock %}
