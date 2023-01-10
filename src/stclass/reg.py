@@ -25,43 +25,68 @@ def reg_mats(fname, user_uploaded_filename, matrix_size, region, user_path):
         name = fname[i]
         # cur = pd.DataFrame(columns = ['chromosome', name])
         if name not in user_uploaded_filename:
-            f_path = os.path.join(settings.MEDIA_ROOT, 'signal_state_file_db', region)
-
-            curFile = pd.read_csv(f_path+'/'+region+'_'+name, sep = "\t", header = None)
-            # column name is rpkm value
-            curFile.columns = ['chromosome', 'start', 'end', 'count', name]
-            cur = curFile[['chromosome', name]]
-            # data = pd.read_csv('output_list.txt', sep=" ", header=None)
-            # data.columns = ["a", "b", "c", "etc."]
-
-            # with open (f_path+'/'+region+'_'+name, 'r') as f:
-            #     curFile = f.readlines()
-            #
-            # # We assume that the format is as follows:
-            # # chr start end count rpkm
-            # for row in range(len(curFile)):
-            #     tmp = re.split(r'\s+', curFile[row].strip())
-            #     cur.loc[row] = [tmp[chr_index], tmp[rpkm_index]]
-
-            cur = cur.sort_values(by='chromosome', ascending = True)
-            rpkm = pd.concat([rpkm, cur[name]], axis = 1)
-        else:
-            f_path = os.path.join(user_path, 'output', 'mapped', region)
             
-            try:
+            if region == 'WG':
+                
+                curFile = pd.DataFrame(columns=['chromosome', 'start', 'end', 'count', name])
+                # load all the files and concatenate all
+                region_list = ['E1', 'E2', 'E3', 'E4', 'E5', 'E6', 'E7', 'E8', 'E9', 'E10', 'E11', 'E12', 'IRS', 'SUE', 'PRS']
+                for r in region_list:
+                    f_path = os.path.join(settings.MEDIA_ROOT, 'signal_state_file_db', r)
+                    f = pd.read_csv(f_path+'/'+r+'_'+name, sep="\t",header = None)
+                    f.columns = ['chromosome', 'start', 'end', 'count', name]
+                    curFile = pd.concat([curFile, f])
+                # make sure that start and chr combo is unique
+                curFile = curFile.drop_duplicates()
+                # sort by chr and start
+                curFile = curFile.sort_values(by=['chromosome', 'start'])
+        
+            else:
+                f_path = os.path.join(settings.MEDIA_ROOT, 'signal_state_file_db', region)
                 curFile = pd.read_csv(f_path+'/'+region+'_'+name, sep = "\t", header = None)
+                # column name is rpkm value
                 curFile.columns = ['chromosome', 'start', 'end', 'count', name]
-                cur = curFile[['chromosome', name]]
-                cur = cur.sort_values(by='chromosome', ascending = True)
-                rpkm = pd.concat([rpkm, cur[name]], axis = 1)
-            except pd.errors.EmptyDataError:
-                # curFile = pd.DataFrame(columns = ['chromosome', 'start', 'end', 'count', name])
-                next
+        else:
+            if region == "WG":
+                curFile = pd.DataFrame(columns=['chromosome', 'start', 'end', 'count', name])
+                # load all the files and concatenate all
+                region_list = ['E1', 'E2', 'E3', 'E4', 'E5', 'E6', 'E7', 'E8', 'E9', 'E10', 'E11', 'E12', 'IRS', 'SUE', 'PRS']
+                for r in region_list:
+                    f_path = os.path.join(user_path, 'output', 'mapped', r)
+                    try:
+                        f = pd.read_csv(f_path+'/'+r+'_'+name, sep = "\t", header = None)
+                        f.columns = ['chromosome', 'start', 'end', 'count', name]
+                        curFile = pd.concat([curFile, f])
+                    except pd.errors.EmptyDataError:
+                        next
+                # make sure that start and chr combo is unique
+                curFile = curFile.drop_duplicates()
+                # sort by chr and start
+                curFile = curFile.sort_values(by=['chromosome', 'start'])
+            else:
+                f_path = os.path.join(user_path, 'output', 'mapped', region)
             
-            # curFile.columns = ['chromosome', 'start', 'end', 'count', name]
-            # cur = curFile[['chromosome', name]]
-            # cur = cur.sort_values(by='chromosome', ascending = True)
-            # rpkm = pd.concat([rpkm, cur[name]], axis = 1)
+                try:
+                    curFile = pd.read_csv(f_path+'/'+region+'_'+name, sep = "\t", header = None)
+                    curFile.columns = ['chromosome', 'start', 'end', 'count', name]
+                except pd.errors.EmptyDataError:
+                    next
+
+        # cur = curFile[['chromosome', name]]
+        # cur = cur.sort_values(by='chromosome', ascending = True)
+        curFile = curFile.sort_values(by=['chromosome', 'start'], ascending=True)
+        
+        # rpkm = rpkm.loc[~rpkm.index.duplicated(keep='first')]
+        # cur = cur.loc[~cur.index.duplicated(keep='first')]
+        
+        # rpkm = pd.concat([rpkm, cur[name]], axis = 1)
+        if rpkm.empty:
+            rpkm = curFile[[name]].copy()
+        else:
+            rpkm.reset_index(inplace=True, drop=True)
+            curFile.reset_index(inplace=True, drop=True)
+            rpkm = pd.concat([rpkm, curFile[name]], axis = 1)
+        
     # Calculate pearson correlation (distance matrix).
     cor_matrix = 1 - rpkm.corr(method = "pearson")
 

@@ -292,7 +292,11 @@ def rgClassifyResult(request):
                         coverage = float(r[1])
             f_order_new[i] = f_order_new[i] + ' (' + str(round(coverage, 3)) + ')'
         else:
-            f_order_new[i] = f_order_new[i] + ' (' + str(round(list(signal_coverage_value.filter(fileID = f_order_new[i]).values_list('value', flat = True))[0], 3)) + ')'
+            if region != 'WG':
+                f_order_new[i] = f_order_new[i] + ' (' + str(round(list(signal_coverage_value.filter(fileID = f_order_new[i]).values_list('value', flat = True))[0], 3)) + ')'
+            else:
+                f_order_new[i] = f_order_new[i]
+        
         # f_order_new[i] = f_order_new[i]
         
     # proc_time = time.time()-start_time

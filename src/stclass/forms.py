@@ -74,7 +74,7 @@ class InputForm(forms.Form):
     region = forms.ChoiceField(
         choices=REGION_CHOICES, 
         required=True, 
-        label = 'Genomic region <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-original-title="Select the genomic regions you wish to investigate"></span>'
+        label = 'Genomic region <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-original-title="Select the genomic regions you wish to investigate. Note: If \'Whole Genome\' is selected, processing time will take significantly longer."></span>'
     )
     rank_plot = forms.BooleanField(
         required=False,
