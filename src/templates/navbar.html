@@ -11,18 +11,19 @@
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <li {% if page and page == "PADv1" %} class="active"{% endif %}><a href="/PADv1">PAD</a></li>
-            <li {% if page and page == "newPAD" %} class="active"{% endif %}><a href="/">PAD2</a></li>
-	    <li {% if page and page == "instruction" %} class="mav-item dropdown active"{% elif page %}class="nav-item dropdown" {% endif %}>
-                <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Instruction
-                </a>
-		<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-			<a class="dropdown-item" href="/PADv1/instruction">PADv1</a>
-                </div>
-	    </li>
-        </ul>
+      <ul class="nav navbar-nav">
+        <li {% if page and page == "PADv1" %} class="active"{% endif %}><a href="/PADv1">PAD</a></li>
+        <li {% if page and page == "newPAD" %} class="active"{% endif %}><a href="/">PAD2</a></li>
+	      <li {% if page and page == "instruction" %} class="mav-item dropdown active"{% elif page %}class="nav-item dropdown" {% endif %}>
+          <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Instruction
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item" href="/PADv1/instruction">PADv1</a></li>
+            <li><a class="dropdown-item" href="/instruction">PAD2</a></li>
+          </diulv>
+	      </li>
+      </ul>
     </div>
   </div>
 </nav>
