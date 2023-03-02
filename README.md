@@ -14,7 +14,7 @@ PAD2 is an easy-to-use interactive web application that enables the investigatio
 
 ## Requirements
 
-PAD2 is developed in Python3, using Django framework. The required versions and dependent packages are available in the `requirements.txt`.
+PAD2 is developed in Python3, using Django framework. The required versions of dependent packages are available in the `requirements.txt`.
 
 
 
